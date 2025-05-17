@@ -1,5 +1,8 @@
-export async function getTasks() {
-  const result = await fetch("http://localhost:1337/api/tasks?populate=*",{
+export async function getTasks({ queryKey }) {
+  const [_key, page ] = queryKey;
+  const pageSize = 3;
+  
+  const result = await fetch(`http://localhost:1337/api/tasks?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,{
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -7,8 +10,6 @@ export async function getTasks() {
     },
   });
 
-  const data = await result.json();
-  console.log(data.data);
-  
+  const data = await result.json();    
   return data;
 }
