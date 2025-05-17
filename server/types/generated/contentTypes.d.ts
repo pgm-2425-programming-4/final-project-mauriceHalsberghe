@@ -405,6 +405,66 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTaskLabelTaskLabel extends Struct.CollectionTypeSchema {
+  collectionName: 'task_labels';
+  info: {
+    description: '';
+    displayName: 'Task Label';
+    pluralName: 'task-labels';
+    singularName: 'task-label';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::task-label.task-label'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    tasks: Schema.Attribute.Relation<'manyToMany', 'api::task.task'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTaskStatusTaskStatus extends Struct.CollectionTypeSchema {
+  collectionName: 'task_statuses';
+  info: {
+    description: '';
+    displayName: 'Task Status';
+    pluralName: 'task-statuses';
+    singularName: 'task-status';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::task-status.task-status'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTaskTask extends Struct.CollectionTypeSchema {
   collectionName: 'tasks';
   info: {
@@ -426,12 +486,15 @@ export interface ApiTaskTask extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
-    taskstatus: Schema.Attribute.Enumeration<
-      ['todo', 'inprogress', 'ready', 'done']
+    task_labels: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::task-label.task-label'
     >;
-    title: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    task_status: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::task-status.task-status'
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -948,6 +1011,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::project.project': ApiProjectProject;
+      'api::task-label.task-label': ApiTaskLabelTaskLabel;
+      'api::task-status.task-status': ApiTaskStatusTaskStatus;
       'api::task.task': ApiTaskTask;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
