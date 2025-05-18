@@ -1,6 +1,4 @@
-export async function getTasks({ queryKey }) {
-  const [_key, page ] = queryKey;
-  const pageSize = 3;
+export async function getTasks({ page, pageSize }) {
   
   const result = await fetch(`http://localhost:1337/api/tasks?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,{
     method: "GET",

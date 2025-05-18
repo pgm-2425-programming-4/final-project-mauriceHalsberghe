@@ -1,4 +1,4 @@
-export function Pagination({ currentPage, pageCount, onPageChanged }) {
+export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, onPageSizeChanged }) {
   // https://bulma.io/documentation/components/pagination/
 
   const CreatePageButton = (i) => {
@@ -50,18 +50,42 @@ export function Pagination({ currentPage, pageCount, onPageChanged }) {
     }
 
   return (
-    <nav className="pagination" role="navigation" aria-label="pagination">
-      <button 
-        onClick={() => {onPageChanged(currentPage-1)}} 
-        className="pagination-previous" disabled={currentPage===1}>Previous page</button>
+    <>
+      <nav className="pagination" role="navigation" aria-label="pagination">
+        <div className="select">
+          <select
+            value={pageSize}
+            onChange={(event) => {
+              const selectedValue = event.target.value;
+              const numericValue = Number(selectedValue);
+              onPageSizeChanged(numericValue);
+            }}
+          >
+            <option value={3}>3 items per page</option>
+            <option value={5}>5 items per page</option>
+            <option value={10}>10 items per page</option>
+            <option value={15}>15 items per page</option>
+          </select>
 
-      <button onClick={() => {onPageChanged(currentPage+1)}} 
-      className="pagination-next" disabled={currentPage===pageCount} >Next page</button>
-      <ul className="pagination-list">
-        
-        {generate()}
+        </div>
 
-      </ul>
-    </nav>
+        <button
+          onClick={() => onPageChanged(currentPage - 1)}
+          className="pagination-previous"
+          disabled={currentPage === 1}
+        >
+          Previous page
+        </button>
+
+        <button
+          onClick={() => onPageChanged(currentPage + 1)}
+          className="pagination-next"
+          disabled={currentPage === pageCount}
+        >
+          Next page
+        </button>
+        <ul className="pagination-list">{generate()}</ul>
+      </nav>
+    </>
   );
 }
