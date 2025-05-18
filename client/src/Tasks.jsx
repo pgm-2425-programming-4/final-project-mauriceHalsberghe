@@ -39,6 +39,7 @@ export function Tasks() {
         pageSize={pageSize}
         onPageSizeChanged={(size) => {
           setPageSize(size);
+          setCurrentPage(1);
         }}
       />
     </>
