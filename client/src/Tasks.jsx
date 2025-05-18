@@ -24,7 +24,7 @@ export function Tasks() {
     
   return (
     <>
-      <ul>
+      <ul className='backlog'>
         {tasks.map(task => (
           <li key={task.id}>
             <h2>{task.title}</h2>
