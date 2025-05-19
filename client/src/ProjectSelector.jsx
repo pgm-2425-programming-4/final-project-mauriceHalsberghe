@@ -9,8 +9,6 @@ export function ProjectSelector({ selectedProjectId, onChange }) {
 
   if (isPending) return <p>Loading projects...</p>;
   if (isError) return <p>Failed to load projects</p>;
-
-  console.log(selectedProjectId);
   
   return (
     <div className="select">
