@@ -1,8 +1,6 @@
-export async function getTasks({ page, pageSize, projectId }) {
+export async function getProjects() {
 
-  
-  const result = await fetch( `http://localhost:1337/api/tasks?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[project][id][$eq]=${projectId}`,
-  {
+  const response = await fetch('http://localhost:1337/api/projects', {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -10,6 +8,6 @@ export async function getTasks({ page, pageSize, projectId }) {
     },
   });
 
-  const data = await result.json();    
+  const data = await response.json();
   return data;
 }

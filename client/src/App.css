@@ -18,8 +18,11 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+h1 {
+  margin: 3rem;
+}
 
-nav {
+.pagination {
   position: absolute;
   left: 50%;
   bottom: 2rem;
