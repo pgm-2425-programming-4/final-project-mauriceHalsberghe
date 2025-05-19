@@ -29,10 +29,12 @@ nav {
 .backlog {
   font-size: 1.2rem;
   text-align: left;
-  li {
-    height: fit-content;
-    margin-bottom: 1rem;
+  width: 100%;
+  td, th {
+    padding: 0.5rem;
+    border: 1px solid #dddddd;
   }
+
 }
 
 

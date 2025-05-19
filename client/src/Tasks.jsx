@@ -24,13 +24,23 @@ export function Tasks() {
     
   return (
     <>
-      <ul className='backlog'>
-        {tasks.map(task => (
-          <li key={task.id}>
-            <h2>{task.title}</h2>
-          </li>
-        ))}
-      </ul>
+      <h1>Backlog for Project 1</h1>
+      <table className='backlog'>
+        <thead>
+          <tr>
+            <th>Task name</th>
+            <th>Task Project</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map(task => (
+            <tr key={task.id}>
+              <td>{task.title}</td>
+              <td>{task.project.title}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       <Pagination
         currentPage={currentPage}
