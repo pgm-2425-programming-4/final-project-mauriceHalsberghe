@@ -1,26 +1,24 @@
 {
   "kind": "collectionType",
-  "collectionName": "projects",
+  "collectionName": "task_statuses",
   "info": {
-    "singularName": "project",
-    "pluralName": "projects",
-    "displayName": "Project",
+    "singularName": "task-status",
+    "pluralName": "task-statuses",
+    "displayName": "Task Status",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": true,
-      "unique": true
+    "name": {
+      "type": "string"
     },
     "tasks": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::task.task",
-      "mappedBy": "project"
+      "mappedBy": "task_status"
     }
   }
 }

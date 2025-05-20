@@ -1,5 +1,6 @@
 #root {
   max-width: 1280px;
+  width: 50rem;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -17,6 +18,29 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+h1 {
+  margin: 3rem;
+  font-size: 2rem;
+}
+
+.pagination {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+}
+
+.backlog {
+  font-size: 1.2rem;
+  text-align: left;
+  width: 100%;
+  td, th {
+    padding: 0.5rem;
+    border: 1px solid #dddddd;
+  }
+
+}
+
 
 @keyframes logo-spin {
   from {

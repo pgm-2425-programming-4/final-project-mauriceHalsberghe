@@ -1,26 +1,25 @@
 {
   "kind": "collectionType",
-  "collectionName": "projects",
+  "collectionName": "task_labels",
   "info": {
-    "singularName": "project",
-    "pluralName": "projects",
-    "displayName": "Project",
+    "singularName": "task-label",
+    "pluralName": "task-labels",
+    "displayName": "Task Label",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
-    "title": {
+    "name": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
     },
     "tasks": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::task.task",
-      "mappedBy": "project"
+      "inversedBy": "task_labels"
     }
   }
 }

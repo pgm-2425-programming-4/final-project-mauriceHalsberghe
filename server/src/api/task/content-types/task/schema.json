@@ -13,8 +13,7 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
     },
     "description": {
       "type": "text"
@@ -25,14 +24,17 @@
       "target": "api::project.project",
       "inversedBy": "tasks"
     },
-    "taskstatus": {
-      "type": "enumeration",
-      "enum": [
-        "todo",
-        "inprogress",
-        "ready",
-        "done"
-      ]
+    "task_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::task-status.task-status",
+      "inversedBy": "tasks"
+    },
+    "task_labels": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::task-label.task-label",
+      "mappedBy": "tasks"
     }
   }
 }
