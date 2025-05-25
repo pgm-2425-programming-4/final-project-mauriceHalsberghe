@@ -1,3 +1,5 @@
+import  { PAGE_SIZE_OPTIONS } from "../constants/constants.js"
+
 export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, onPageSizeChanged }) {
   // https://bulma.io/documentation/components/pagination/
 
@@ -61,10 +63,11 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
               onPageSizeChanged(numericValue);
             }}
           >
-            <option value={3}>3 items per page</option>
-            <option value={5}>5 items per page</option>
-            <option value={10}>10 items per page</option>
-            <option value={15}>15 items per page</option>
+            {PAGE_SIZE_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option} items per page
+              </option>
+            ))}
           </select>
 
         </div>

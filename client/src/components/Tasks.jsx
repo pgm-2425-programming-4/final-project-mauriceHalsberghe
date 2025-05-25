@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTasks } from "./queries/getTasks.jsx";
+import { getTasks } from "../queries/getTasks.jsx";
 import { useState } from "react";
 import { Pagination } from "./Pagination.jsx";
+import  { PAGE_SIZE_OPTIONS } from "../constants/constants.js"
 
 export function Tasks({ selectedProjectId }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTIONS[0]);
 
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["tasks", currentPage, pageSize, selectedProjectId],
@@ -17,8 +18,7 @@ export function Tasks({ selectedProjectId }) {
   if (isError) return <span>Error: {error.message}</span>;
 
   const tasks = data.data.filter(
-    (task) =>
-      task.task_status.id === 11 && task.project.id === selectedProjectId
+    (task) => task.project.id === selectedProjectId
   );
 
   const selectedProject =

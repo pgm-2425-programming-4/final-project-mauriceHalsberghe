@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProjects } from "./queries/getProjects.jsx";
+import { getProjects } from "../queries/getProjects.jsx";
 
 export function ProjectSelector({ selectedProjectId, onChange }) {
   const { data, isPending, isError } = useQuery({
