@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTasks } from "./queries/getTasks.jsx";
+import { getTasks } from "../queries/getTasks.jsx";
 import { useState } from "react";
 import { Pagination } from "./Pagination.jsx";
 
@@ -18,7 +18,7 @@ export function Tasks({ selectedProjectId }) {
 
   const tasks = data.data.filter(
     (task) =>
-      task.task_status.id === 11 && task.project.id === selectedProjectId
+      task.project.id === selectedProjectId
   );
 
   const selectedProject =
