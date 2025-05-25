@@ -1,17 +1,9 @@
 module.exports = [
+  'strapi::logger',
   'strapi::errors',
   'strapi::security',
-  {
-    name: 'strapi::cors',
-    config: {
-      origin: ['https://final-project-maurhals.netlify.app/', 'http://localhost:5173'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      headers: '*',
-      credentials: true,
-    },
-  },
+  'strapi::cors',
   'strapi::poweredBy',
-  'strapi::logger',
   'strapi::query',
   'strapi::body',
   'strapi::session',
