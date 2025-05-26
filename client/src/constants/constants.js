@@ -1,5 +1,5 @@
 export const API_URL = import.meta.env.PROD
-  ? "https://jammin-api-o3zr.onrender.com/api"
+  ? "https://jammin-api-s1mr.onrender.com/api"
   : "http://localhost:1337/api";
   
 export const API_TOKEN = import.meta.env.PROD
