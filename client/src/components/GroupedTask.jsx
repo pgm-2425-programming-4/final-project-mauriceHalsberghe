@@ -26,14 +26,13 @@ export default function GroupedTaskList({ tasks }) {
 
 
   return (
-    <div>
+    <div className="main">
       {statuses.map((status) => (
-        <div key={status.id}>
-          <br />
-          <h2>{status.name}:</h2>
-          <ul>
+        <div key={status.id} className="main__status">
+          <h2>{status.name}</h2>
+          <ul className="main__list">
             {(tasksGroupedByStatus[status.id] || []).map((task) => (
-              <li key={task.id}>{task.title}</li>
+              <li className="main__card" key={task.id}>{task.title}</li>
             ))}
           </ul>
         </div>

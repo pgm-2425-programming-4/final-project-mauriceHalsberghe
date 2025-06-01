@@ -37,11 +37,10 @@ function Index() {
 
   return (
     <main>
-      <div>
-        <h2>Projects:</h2>
-        <ul>
+      <div className="aside">
+        <ul className="aside__list">
           {projects.data.map((project) => (
-            <li key={project.id}>
+            <li key={project.id} className="aside__item">
               <button onClick={() => setSelectedProjectId(project.id)}>
                 {project.title}
               </button>
@@ -50,10 +49,7 @@ function Index() {
         </ul>
       </div>
 
-      <div>
-        <h2>Tasks for selected project:</h2>
-        <GroupedTask tasks={tasks} />
-      </div>
+      <GroupedTask tasks={tasks} />
     </main>
   );
 }
