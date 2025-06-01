@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { fetchProjects } from "../queries/fetch-projects";
 import { fetchTasks } from "../queries/fetch-tasks";
+import GroupedTask from "../components/GroupedTask";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -35,26 +36,24 @@ function Index() {
   }, [selectedProjectId]);
 
   return (
-    <div>
-      <h2>Projects</h2>
-      <ul>
-        {projects.data.map((project) => (
-          <li key={project.id}>
-            <button onClick={() => setSelectedProjectId(project.id)}>
-              {project.title}
-            </button>
-          </li>
-        ))}
-      </ul>
-
+    <main>
       <div>
-        <h2>Tasks for selected project:</h2>
+        <h2>Projects:</h2>
         <ul>
-          {tasks.map((task) => (
-            <li key={task.id}>{task.title}</li>
+          {projects.data.map((project) => (
+            <li key={project.id}>
+              <button onClick={() => setSelectedProjectId(project.id)}>
+                {project.title}
+              </button>
+            </li>
           ))}
         </ul>
       </div>
-    </div>
+
+      <div>
+        <h2>Tasks for selected project:</h2>
+        <GroupedTask tasks={tasks} />
+      </div>
+    </main>
   );
 }
