@@ -11,5 +11,5 @@ export async function fetchProjects() {
 
   const data = await response.json();
 
-  return data;
+  return data.data;
 }

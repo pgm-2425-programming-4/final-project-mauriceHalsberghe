@@ -1,55 +1,31 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { fetchProjects } from "../queries/fetch-projects";
-import { fetchTasks } from "../queries/fetch-tasks";
-import GroupedTask from "../components/GroupedTask";
+import { useQuery } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/")({
-  loader: async () => {
-    const projects = await fetchProjects();
-    if (!projects) throw notFound();
-    return { projects };
-  },
-
-  component: Index,
-  notFoundComponent: ({ data }) => {
-    if (data.data === "INVALID_ROUTE") {
-      return <div>Invalid route</div>;
-    }
-    return <div>No data found</div>;
-  },
+  component: Users,
 });
 
-function Index() {
-  const { projects } = Route.useLoaderData();
-  const [selectedProjectId, setSelectedProjectId] = useState(
-    projects.data?.[0]?.id ?? null
-  );
-  const [tasks, setTasks] = useState([]);
+function Users() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["users"],
+    queryFn: fetchProjects,
+  });
 
-  useEffect(() => {
-    if (selectedProjectId != null) {
-      fetchTasks(selectedProjectId).then((result) => {
-        setTasks(result.data || []);
-      });
-    }
-  }, [selectedProjectId]);
-
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  
   return (
-    <main>
-      <div className="aside">
-        <ul className="aside__list">
-          {projects.data.map((project) => (
-            <li key={project.id} className="aside__item">
-              <button onClick={() => setSelectedProjectId(project.id)}>
-                {project.title}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <GroupedTask tasks={tasks} />
-    </main>
+    <div className="aside"> 
+      <ul className="aside__list">
+        {data.map((project) => (
+          <li className="aside__item" key={project.id}>
+            <Link to={`/projects/${project.id}`} className="[&.active]:font-bold">
+              {project.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
