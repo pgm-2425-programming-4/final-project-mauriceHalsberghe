@@ -13,5 +13,5 @@ export async function fetchTasks(projectId) {
 
   const data = await result.json();
 
-  return data;
+  return data.data;
 }
