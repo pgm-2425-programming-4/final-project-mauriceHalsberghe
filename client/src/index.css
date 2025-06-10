@@ -76,16 +76,13 @@ main {
 
   .aside__item {
     width: fit-content;
-        
-    button {
-      cursor: pointer;
-      color: var(--text-200);
-      background-color: transparent;
-      border: none;
-      
-      &:hover {
-        color: var(--primary-100);
-      }
+    color: var(--text-200);
+    background-color: transparent;
+    border: none;
+    
+    &:hover {
+      color: var(--primary-100);
+    
     }
   }
 }
