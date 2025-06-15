@@ -1,11 +1,11 @@
 import { createFileRoute, notFound, Link } from '@tanstack/react-router'
 import { fetchTasks } from '../../queries/fetch-tasks-by-projectid'
+import GroupedTasks from '../../components/GroupedTasks'
 
 export const Route = createFileRoute('/projects/$projectId')({
     loader: async ({params}) => {
 
       const data = await fetchTasks(params.projectId);
-      
       
       if (isEmpty(data) ) {
         throw notFound();
@@ -20,6 +20,7 @@ export const Route = createFileRoute('/projects/$projectId')({
 function Tasks() {
 
   const data = Route.useLoaderData();
+  console.log(data);
   
   return (
     <ul>
