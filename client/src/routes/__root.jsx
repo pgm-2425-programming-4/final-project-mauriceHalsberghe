@@ -17,18 +17,18 @@ function Navigation() {
     if (error) return <p>Error: {error.message}</p>;
   return (
     <>
-        <nav className='navigation'>
-            <Link to="/">Home</Link>
+        <nav className='aside'>
+            <Link className='aside__link' to="/">Home</Link>
               <ul className="aside__list">
               {data.map((project) => (
                 <li className="aside__item" key={project.id}>
-                  <Link to={`/projects/${project.documentId}`} className="[&.active]:font-bold">
+                  <Link to={`/projects/${project.documentId}`} className='aside__link'>
                     {project.title}
                   </Link>
                 </li>
               ))}
             </ul>
-            <Link to="/about">About</Link>
+            <Link className='aside__link' to="/about">About</Link>
         </nav>
         <Outlet/>
     </>
