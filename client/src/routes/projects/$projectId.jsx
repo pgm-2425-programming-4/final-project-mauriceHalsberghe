@@ -5,7 +5,8 @@ export const Route = createFileRoute('/projects/$projectId')({
     loader: async ({params}) => {
 
       const data = await fetchTasks(params.projectId);
-
+      
+      
       if (isEmpty(data) ) {
         throw notFound();
       }

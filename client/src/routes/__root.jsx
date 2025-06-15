@@ -22,7 +22,7 @@ function Navigation() {
               <ul className="aside__list">
               {data.map((project) => (
                 <li className="aside__item" key={project.id}>
-                  <Link to={`/projects/${project.id}`} className="[&.active]:font-bold">
+                  <Link to={`/projects/${project.documentId}`} className="[&.active]:font-bold">
                     {project.title}
                   </Link>
                 </li>
