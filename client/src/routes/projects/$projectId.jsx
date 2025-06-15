@@ -1,37 +1,33 @@
 import { createFileRoute, notFound, Link } from '@tanstack/react-router'
 import { fetchTasks } from '../../queries/fetch-tasks-by-projectid'
+import { fetchTasksStatuses } from '../../queries/fetch-tasks-statuses';
 import GroupedTasks from '../../components/GroupedTask'
 
-export const Route = createFileRoute('/projects/$projectId')({
-    loader: async ({params}) => {
 
-      const data = await fetchTasks(params.projectId);
-      
-      if (isEmpty(data) ) {
-        throw notFound();
-      }
-      return data;
-    },
-    
-    component: Tasks,
-    notFoundComponent: () => <div>Tasks not found</div>
-})
+export const Route = createFileRoute('/projects/$projectId')({
+  loader: async ({ params }) => {
+    const [tasks, statuses] = await Promise.all([
+      fetchTasks(params.projectId),
+      fetchTasksStatuses()
+    ]);
+
+    if (!tasks || tasks.length === 0) {
+      throw notFound();
+    }
+
+    return { tasks, statuses };
+  },
+
+  component: Tasks,
+  notFoundComponent: () => <div>Project not found</div>
+});
 
 function Tasks() {
-  const data = Route.useLoaderData();
-  
-  return (
-    <div>
-      <GroupedTasks tasks={data} />
-    </div>
-  )
-}
+  const { tasks, statuses } = Route.useLoaderData();
 
-function isEmpty(obj) {
-  for ( const prop in obj) {
-    if( Object.hasOwn(obj, prop)) {
-      return false;
-    }
-  }
-  return true
+  return (
+    <section>
+      <GroupedTasks tasks={tasks} statuses={statuses} />
+    </section>
+  );
 }

@@ -1,26 +1,23 @@
 import React from 'react';
+import GroupedStatus from './GroupedStatus';
 
-export default function GroupedTasks({ tasks }) {
+export default function GroupedTasks({ tasks, statuses }) {
   const grouped = groupTasksByProject(tasks);
-
+  
   return (
     <div>
       {Object.entries(grouped).map(([projectId, { project, tasks }]) => (
-        <ProjectTasks key={projectId} project={project} tasks={tasks} />
+        <ProjectTasks key={projectId} project={project} tasks={tasks} statuses={statuses} />
       ))}
     </div>
   );
 }
 
-function ProjectTasks({ project, tasks }) {
+function ProjectTasks({ project, tasks, statuses }) {
   return (
     <div>
       <h2>{project.title}</h2>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>{task.title}</li>
-        ))}
-      </ul>
+      <GroupedStatus tasks={tasks} statuses={statuses} />
     </div>
   );
 }
