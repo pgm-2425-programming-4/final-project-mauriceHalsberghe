@@ -5,20 +5,20 @@ export default function GroupedTasks({ tasks, statuses }) {
   const grouped = groupTasksByProject(tasks);
   
   return (
-    <div>
+    <>
       {Object.entries(grouped).map(([projectId, { project, tasks }]) => (
         <ProjectTasks key={projectId} project={project} tasks={tasks} statuses={statuses} />
       ))}
-    </div>
+    </>
   );
 }
 
 function ProjectTasks({ project, tasks, statuses }) {
   return (
-    <div>
+    <>
       <h2>{project.title}</h2>
       <GroupedStatus tasks={tasks} statuses={statuses} />
-    </div>
+    </>
   );
 }
 

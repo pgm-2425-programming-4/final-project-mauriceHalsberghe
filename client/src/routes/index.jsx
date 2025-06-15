@@ -6,10 +6,10 @@ export const Route = createFileRoute('/')({
 
 function Home() {
   return (
-    <div>
+    <section className="main">
       <p>
         Welcome to my Kanban app! Please select an item from the navigation menu.
       </p>
-    </div> 
+    </section> 
   )
 }

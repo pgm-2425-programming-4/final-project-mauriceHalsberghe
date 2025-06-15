@@ -19,6 +19,7 @@ function Navigation() {
     <>
         <nav className='aside'>
             <Link className='aside__link' to="/">Home</Link>
+            <p className='aside__subtitle'>Projects</p>
               <ul className="aside__list">
               {data.map((project) => (
                 <li className="aside__item" key={project.id}>
@@ -28,6 +29,7 @@ function Navigation() {
                 </li>
               ))}
             </ul>
+            <p className='aside__subtitle'>Info</p>
             <Link className='aside__link' to="/about">About</Link>
         </nav>
         <Outlet/>

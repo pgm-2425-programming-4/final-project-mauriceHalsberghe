@@ -5,13 +5,13 @@ export default function GroupedStatus({ tasks, statuses }) {
   const groupedByStatus = groupTasksByStatus(tasks);
   
   return (
-    <div>
+    <div className='main__content'>
       {statuses.map(status => (
-        <div key={status.id} style={{ marginBottom: '15px' }}>
-          <h3>{status.name}</h3>
-          <ul>
+        <div className='status' key={status.id}>
+          <h3 className='status__title'>{status.name}</h3>
+          <ul className='status__list'>
             {(groupedByStatus[status.id] || []).map(task => (
-              <li key={task.id}>{task.title}</li>
+              <li className='status__card' key={task.id}>{task.title}</li>
             ))}
           </ul>
         </div>

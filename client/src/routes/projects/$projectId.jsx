@@ -26,7 +26,7 @@ function Tasks() {
   const { tasks, statuses } = Route.useLoaderData();
 
   return (
-    <section>
+    <section className='main'>
       <GroupedTasks tasks={tasks} statuses={statuses} />
     </section>
   );
