@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, Link } from '@tanstack/react-router'
 import { fetchTasks } from '../../queries/fetch-tasks-by-projectid'
-import GroupedTasks from '../../components/GroupedTasks'
+import GroupedTasks from '../../components/GroupedTask'
 
 export const Route = createFileRoute('/projects/$projectId')({
     loader: async ({params}) => {
@@ -14,22 +14,16 @@ export const Route = createFileRoute('/projects/$projectId')({
     },
     
     component: Tasks,
-    notFoundComponent: () => <div>Student not found</div>
+    notFoundComponent: () => <div>Tasks not found</div>
 })
 
 function Tasks() {
-
   const data = Route.useLoaderData();
-  console.log(data);
   
   return (
-    <ul>
-      {data.map((task) =>
-        <li key={task.id}>
-          {task.title}
-        </li>
-      )}
-    </ul>
+    <div>
+      <GroupedTasks tasks={data} />
+    </div>
   )
 }
 

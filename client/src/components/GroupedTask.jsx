@@ -1,15 +1,26 @@
-import React from "react";
+import React from 'react';
 
-export default function GroupedTaskList({ tasks }) {
-  const groupedTasks = groupTasksByProject(tasks);
+export default function GroupedTasks({ tasks }) {
+  const grouped = groupTasksByProject(tasks);
 
-  console.log(groupedTasks);
-  
   return (
     <div>
-      {Object.entries(groupedTasks).map(([projectId, { project, tasks }]) => (
+      {Object.entries(grouped).map(([projectId, { project, tasks }]) => (
         <ProjectTasks key={projectId} project={project} tasks={tasks} />
       ))}
+    </div>
+  );
+}
+
+function ProjectTasks({ project, tasks }) {
+  return (
+    <div>
+      <h2>{project.title}</h2>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>{task.title}</li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -27,7 +38,6 @@ function groupTasksByProject(tasks) {
     }
     grouped[projectId].tasks.push(task);
   });
-  console.log(grouped);
-  
+
   return grouped;
 }
