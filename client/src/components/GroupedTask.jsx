@@ -20,7 +20,7 @@ function ProjectTasks({ project, tasks, statuses }) {
     <>
       <header className='header'>
         <h2 className='header__title'>{project.title}</h2>
-        <Link to="/backlog" className="header__link">View backlog</Link>
+        <Link to={`/projects/${project.documentId}/backlog`} className="header__link">View backlog</Link>
       </header>
       <GroupedStatus tasks={tasks} statuses={statuses} />
     </>

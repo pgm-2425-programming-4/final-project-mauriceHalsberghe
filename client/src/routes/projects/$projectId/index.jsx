@@ -1,10 +1,10 @@
 import { createFileRoute, notFound, Link } from '@tanstack/react-router'
-import { fetchTasks } from '../../queries/fetch-tasks-by-projectid'
-import { fetchTasksStatuses } from '../../queries/fetch-tasks-statuses';
-import GroupedTasks from '../../components/GroupedTask'
+import { fetchTasks } from '../../../queries/fetch-tasks-by-projectid'
+import { fetchTasksStatuses } from '../../../queries/fetch-tasks-statuses';
+import GroupedTasks from '../../../components/GroupedTask'
 
 
-export const Route = createFileRoute('/projects/$projectId')({
+export const Route = createFileRoute('/projects/$projectId/')({
   loader: async ({ params }) => {
     const [tasks, statuses] = await Promise.all([
       fetchTasks(params.projectId),
