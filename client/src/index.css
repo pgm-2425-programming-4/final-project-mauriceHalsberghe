@@ -135,6 +135,7 @@ ul {
 .main:has(.backlog) {
   display: flex;
   flex-direction: column;
+  padding-left: 2rem;
 }
 
 .backlog {
@@ -151,6 +152,7 @@ ul {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -160,7 +162,7 @@ ul {
   align-items: center;
   gap: 1rem;
   padding-left: 6rem;
-  margin-top: 3rem;
+  width: fit-content;
 
   .pagination__select {
     background-color: transparent;
