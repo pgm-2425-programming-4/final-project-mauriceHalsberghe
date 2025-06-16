@@ -36,29 +36,33 @@ function BacklogPage() {
   );
 
   return (
-    <section className="main backlog">
-      <h2 className="backlog__title">Backlog for {project.title}</h2>
+      <section className="main">
+        <div className="backlog">
+          <h2 className="backlog__title">Backlog for {project.title}</h2>
 
-      {paginatedTasks.length === 0 ? (
-        <p>No backlog tasks found</p>
-      ) : (
-        <>
-        <ul className="backlog__list">
-          {paginatedTasks.map((task) => (
-            <li className="backlog__item" key={task.id}>
-              {task.title}
-            </li>
-          ))}
-        </ul>
+          {paginatedTasks.length === 0 ? (
+            <p>No backlog tasks found</p>
+          ) : (
+            <>
+              <ul className="backlog__list">
+                {paginatedTasks.map((task) => (
+                  <li className="backlog__item" key={task.id}>
+                    {task.title}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
 
-        <Pagination 
-          currentPage={currentPage} 
-          pageSize={pageSize} 
-          onPageChanged={(page) => setCurrentPage(page)} 
-          pageCount={pageCount}
-          onPageSizeChanged={(size) => {setPageSize(size); setCurrentPage(1);}} />
-        </>
-      )}
-    </section>
+      <Pagination 
+        currentPage={currentPage} 
+        pageSize={pageSize} 
+        onPageChanged={(page) => setCurrentPage(page)} 
+        pageCount={pageCount}
+        onPageSizeChanged={(size) => {setPageSize(size); setCurrentPage(1);}} 
+        />
+      </section>
   );
+
 }
