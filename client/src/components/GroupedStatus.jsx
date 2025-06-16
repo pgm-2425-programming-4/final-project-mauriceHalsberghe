@@ -2,7 +2,7 @@ import React from "react";
 
 export default function GroupedStatus({ tasks, statuses }) {
   const groupedByStatus = groupTasksByStatus(tasks);
-
+  
   return (
     <div className="main__content">
       {statuses
@@ -12,8 +12,15 @@ export default function GroupedStatus({ tasks, statuses }) {
             <h3 className="status__title">{status.name}</h3>
             <ul className="status__list">
               {(groupedByStatus[status.id] || []).map((task) => (
-                <li className="status__card" key={task.id}>
-                  {task.title}
+                <li className="card" key={task.id}>
+                  <h3 className="card__title">{task.title}</h3>
+                    <ul className="card__labels">
+                      {task.task_labels?.map((label) => (
+                        <li className="card__label" key={label.id}>
+                          {label.name}
+                        </li>
+                      ))}
+                    </ul>
                 </li>
               ))}
             </ul>
