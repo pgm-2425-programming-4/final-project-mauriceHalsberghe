@@ -12,6 +12,6 @@ export async function fetchTasksStatuses() {
   });
 
   const data = await result.json();
-
-  return data;
+  
+  return data.data;
 }

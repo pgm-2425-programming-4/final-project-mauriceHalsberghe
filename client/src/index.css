@@ -1,18 +1,16 @@
-
-
 :root {
-    --primary-100:#0085ff;
-    --primary-200:#69b4ff;
-    --primary-300:#e0ffff;
-    --accent-100:#006fff;
-    --accent-200:#e1ffff;
-    --text-100:#FFFFFF;
-    --text-200:#9e9e9e;
-    --bg-100:#1E1E1E;
-    --bg-200:#2d2d2d;
-    --bg-300:#454545;
+  --primary-100: #0085ff;
+  --primary-200: #69b4ff;
+  --primary-300: #e0ffff;
+  --accent-100: #006fff;
+  --accent-200: #e1ffff;
+  --text-100: #ffffff;
+  --text-200: #9e9e9e;
+  --bg-100: #1e1e1e;
+  --bg-200: #2d2d2d;
+  --bg-300: #454545;
 
-    --border-radius: 0.5rem;
+  --border-radius: 0.5rem;
 }
 
 * {
@@ -42,76 +40,72 @@ ul {
   margin: 0;
 }
 
-
-.header {
-  display: flex;
-  height: 4rem;
-  align-items: center;
-  justify-content: space-around;
-  background-color: var(--bg-200);
-}
-
-.navigation {
-  display: flex;
-  gap: 2rem;
-}
-
-main {
+#root {
   padding: 2rem;
   display: flex;
-
 }
 
 .aside {
-  width: 10rem;
+  min-width: 8rem;
   height: calc(100vh - 8rem);
   border-right: 1px solid var(--bg-300);
   padding-top: 2rem;
 
+  .aside__subtitle {
+    margin-top: 1rem;
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: var(--bg-300);
+  }
+
   .aside__list {
     display: flex;
+    width: fit-content;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .aside__item {
+  .aside__link {
     width: fit-content;
     color: var(--text-200);
-    background-color: transparent;
-    border: none;
-    
     &:hover {
       color: var(--primary-100);
-    
     }
+  }
+
+  .aside__item {
+    background-color: transparent;
+    border: none;
   }
 }
 
 .main {
   padding: 2rem;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.main__status {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  h2 {
-    text-decoration: underline;
+  .main__content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.main__list {
-  margin-right: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+.status {
+  .status__title {
+    text-decoration: underline;
+    margin-bottom: 2rem;
+  }
 
-.main__card {
-  background-color: var(--bg-200);
-  padding: 1rem;
-  border-radius: var(--border-radius);
+  .status__list {
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .status__card {
+    background-color: var(--bg-200);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow:  0px 3px 10px #0000003d;
+  }
+
 }

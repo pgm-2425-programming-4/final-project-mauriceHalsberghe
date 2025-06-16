@@ -1,42 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { fetchTasksStatuses } from "../queries/fetch-tasks-statuses";
+import React from 'react';
+import GroupedStatus from './GroupedStatus';
 
-export default function GroupedTaskList({ tasks }) {
-  const [statuses, setStatuses] = useState([]);
-
-  useEffect(() => {
-    fetchTasksStatuses().then((result) => {
-      const filtered = (result.data || []).filter(
-        (status) => status.name !== "Backlog"
-      );
-      setStatuses(filtered);
-    });
-  }, []);
-
-    const tasksGroupedByStatus = tasks.reduce((groupedTasks, task) => {
-    const statusId = task.task_status.id;
-
-    if (!groupedTasks[statusId]) {
-        groupedTasks[statusId] = [];
-    }
-    groupedTasks[statusId].push(task);
-
-    return groupedTasks;
-    }, {});
-
-
+export default function GroupedTasks({ tasks, statuses }) {
+  const grouped = groupTasksByProject(tasks);
+  
   return (
-    <div className="main">
-      {statuses.map((status) => (
-        <div key={status.id} className="main__status">
-          <h2>{status.name}</h2>
-          <ul className="main__list">
-            {(tasksGroupedByStatus[status.id] || []).map((task) => (
-              <li className="main__card" key={task.id}>{task.title}</li>
-            ))}
-          </ul>
-        </div>
+    <>
+      {Object.entries(grouped).map(([projectId, { project, tasks }]) => (
+        <ProjectTasks key={projectId} project={project} tasks={tasks} statuses={statuses} />
       ))}
-    </div>
+    </>
   );
+}
+
+function ProjectTasks({ project, tasks, statuses }) {
+  return (
+    <>
+      <h2>{project.title}</h2>
+      <GroupedStatus tasks={tasks} statuses={statuses} />
+    </>
+  );
+}
+
+function groupTasksByProject(tasks) {
+  const grouped = {};
+
+  tasks.forEach(task => {
+    const projectId = task.project.id;
+    if (!grouped[projectId]) {
+      grouped[projectId] = {
+        project: task.project,
+        tasks: []
+      };
+    }
+    grouped[projectId].tasks.push(task);
+  });
+
+  return grouped;
 }
