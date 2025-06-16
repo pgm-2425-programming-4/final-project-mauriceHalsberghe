@@ -79,6 +79,29 @@ ul {
   }
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--bg-300);
+  border-radius: var(--border-radius);
+  height: 4rem;
+
+  .header__title {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .header__link {
+    padding: 0.5rem;
+    background-color: var(--primary-100);
+    border-radius: var(--border-radius);
+    &:hover {
+      background-color: var(--primary-200);
+    }
+  }
+}
+
 .main {
   padding: 2rem;
   width: 100%;
