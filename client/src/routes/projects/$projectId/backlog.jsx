@@ -20,7 +20,6 @@ export const Route = createFileRoute('/projects/$projectId/backlog')({
 
 function BacklogPage() {
   const { tasks } = Route.useLoaderData();
-  console.log(tasks);
   
   const backlogTasks = tasks.filter(
     task => task.task_status.name === 'Backlog'
@@ -28,14 +27,14 @@ function BacklogPage() {
   const project = tasks.length > 0 ? tasks[0].project : null;
 
   return (
-    <section>
-      <h2>Backlog for { project.title }</h2>
+    <section className='main backlog'>
+      <h2 className='backlog__title'>Backlog for { project.title }</h2>
 
       {backlogTasks.length === 0 ? ( <p>No backlog tasks found</p>) : 
       (
-        <ul>
+        <ul className='backlog__list'>
           {backlogTasks.map(task => (
-            <li key={task.id}>{task.title}</li>
+            <li className='backlog__item' key={task.id}>{task.title}</li>
           ))}
         </ul>
       )}
