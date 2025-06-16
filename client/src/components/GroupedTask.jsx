@@ -1,5 +1,7 @@
 import React from 'react';
 import GroupedStatus from './GroupedStatus';
+import { Link } from '@tanstack/react-router'
+
 
 export default function GroupedTasks({ tasks, statuses }) {
   const grouped = groupTasksByProject(tasks);
@@ -16,7 +18,10 @@ export default function GroupedTasks({ tasks, statuses }) {
 function ProjectTasks({ project, tasks, statuses }) {
   return (
     <>
-      <h2>{project.title}</h2>
+      <header className='header'>
+        <h2 className='header__title'>{project.title}</h2>
+        <Link to={`/projects/${project.documentId}/backlog`} className="header__link">View backlog</Link>
+      </header>
       <GroupedStatus tasks={tasks} statuses={statuses} />
     </>
   );
