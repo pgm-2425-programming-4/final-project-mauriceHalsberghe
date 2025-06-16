@@ -1,7 +1,7 @@
 import { API_URL, API_TOKEN } from "../constants/constants";
 
-export async function updateTask(taskId, newStatusId) {
-
+export async function updateTask(taskId, newStatusId, data) {
+  
   const response = await fetch(`${API_URL}/tasks/${taskId}`, {
     method: "PUT",
     headers: {
@@ -10,14 +10,16 @@ export async function updateTask(taskId, newStatusId) {
     },
     body: JSON.stringify({
       data: {
-        task_status: newStatusId
+        title: data.title,
+        description: data.description,
+        task_status: newStatusId,
       }
     }),
   });
-
+  
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.error?.message || "Failed to update task");
+    throw new Error(errorData.error?.message || "error update task");
   }
 
   return await response.json();
