@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { fetchTasksStatuses } from "../queries/fetch-tasks-statuses";
+import { fetchLabels } from "../queries/fetch-labels"; // Ensure this exists
 import { addTask } from "../queries/add-task";
 
 export function AddTaskModal({ task, projectId, onClose, onSave }) {
   const [statuses, setStatuses] = useState([]);
+  const [labels, setLabels] = useState([]);
+
   const [selectedStatusId, setSelectedStatusId] = useState(
     task?.task_status?.id ?? ""
   );
+  const [selectedLabelIds, setSelectedLabelIds] = useState([]);
+
   const [title, setTitle] = useState(task?.title ?? "");
   const [description, setDescription] = useState(task?.description || "");
   const [isEditing] = useState(true);
@@ -14,16 +19,20 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    async function fetchStatuses() {
-      const data = await fetchTasksStatuses();
-      setStatuses(data);
+    async function fetchData() {
+      const [statusData, labelData] = await Promise.all([
+        fetchTasksStatuses(),
+        fetchLabels(),
+      ]);
+      setStatuses(statusData);
+      setLabels(labelData);
 
-      if (!task && data.length > 0) {
-        setSelectedStatusId(data[0].id);
+      if (!task && statusData.length > 0) {
+        setSelectedStatusId(statusData[0].id);
       }
     }
 
-    fetchStatuses();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -31,8 +40,17 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
       setTitle(task.title);
       setDescription(task.description || "");
       setSelectedStatusId(task.task_status.id || "");
+      setSelectedLabelIds(task.task_labels?.map((l) => l.id) || []);
     }
   }, [task]);
+
+  const toggleLabel = (labelId) => {
+    setSelectedLabelIds((prev) =>
+      prev.includes(labelId)
+        ? prev.filter((id) => id !== labelId)
+        : [...prev, labelId]
+    );
+  };
 
   const taskAdd = async () => {
     if (!title) {
@@ -44,27 +62,28 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
     setError("");
 
     try {
-      let newTask;
       const response = await addTask(selectedStatusId, {
         title,
         description,
         project: projectId,
         status: selectedStatusId,
+        labels: selectedLabelIds,
       });
 
-      newTask = {
+      const newTask = {
         ...response.data,
         task_status: {
           id: selectedStatusId,
           name: statuses.find((s) => s.id === selectedStatusId)?.name || "",
         },
+        task_labels: labels.filter((l) => selectedLabelIds.includes(l.id)),
       };
 
       if (onSave) {
         onSave(newTask);
       }
     } catch (err) {
-      console.error("Error updating task:", err);
+      console.error("Error adding task:", err);
       setError("Failed to add task.");
     } finally {
       setLoading(false);
@@ -95,9 +114,9 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
             <label>Description</label>
             <textarea
               name="description"
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
               readOnly={!isEditing}
-              value={description}
             ></textarea>
           </div>
 
@@ -114,6 +133,25 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
                 </option>
               ))}
             </select>
+          </div>
+
+          <div>
+            <label>Labels</label>
+            <div className="modal__labels">
+              {labels.map((label) => {
+                const isSelected = selectedLabelIds.includes(label.id);
+                return (
+                  <button
+                    key={label.id}
+                    type="button"
+                    className={`button ${isSelected ? "selected" : ""}`}
+                    onClick={() => toggleLabel(label.id)}
+                  >
+                    {label.name}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {error && <p className="error">{error}</p>}

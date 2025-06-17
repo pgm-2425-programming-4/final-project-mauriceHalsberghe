@@ -14,6 +14,7 @@ export async function addTask(statusId, data) {
         description: data.description,
         task_status: statusId,
         project: data.project,
+        task_labels: Array.isArray(data.labels) ? data.labels.map((id) => ({ id })) : [],
       }
     }),
   });
