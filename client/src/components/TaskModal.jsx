@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchTasksStatuses } from "../queries/fetch-tasks-statuses";
 import { updateTask } from "../queries/update-task";
 
-export function TaskModal({ task, onClose }) {
+export function TaskModal({ task, onClose, onSave }) {
   const [statuses, setStatuses] = useState([]);
   const [selectedStatusId, setSelectedStatusId] = useState(
     task?.task_status?.id ?? ""
@@ -29,29 +29,44 @@ export function TaskModal({ task, onClose }) {
     }
   }, [task]);
 
-  const taskChange = async () => {
-    if (!title || !selectedStatusId) {
-      setError("title is required.");
-      return;
+const taskChange = async () => {
+  if (!title || !selectedStatusId) {
+    setError("title is required.");
+    return;
+  }
+
+  setLoading(true);
+  setError("");
+
+  try {
+    await updateTask(task.documentId, selectedStatusId, {
+    title,
+    description,
+    });
+
+    const fullUpdatedTask = {
+      ...task,
+      title,
+      description,
+      task_status: {
+        id: selectedStatusId,
+        name: statuses.find((s) => s.id === selectedStatusId)?.name || "",
+      },
+    };
+
+    if (onSave) {
+      onSave(fullUpdatedTask);
     }
 
-    setLoading(true);
-    setError("");
+    setIsEditing(false);
+  } catch (err) {
+    console.error("Error updating task:", err);
+    setError("Failed to update task.");
+  } finally {
+    setLoading(false);
+  }
+};
 
-    try {
-      await updateTask(task.documentId, selectedStatusId, {
-        title,
-        description,
-      });
-
-      setIsEditing(false);
-    } catch (err) {
-      console.error("Error updating task:", err);
-      setError("Failed to update task.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (!task) {
     return null;
@@ -105,9 +120,15 @@ export function TaskModal({ task, onClose }) {
 
           <div className="modal__actions">
             {!isEditing ? (
-              <button onClick={() => setIsEditing(true)}>Edit</button>
+              <button className="button" onClick={() => setIsEditing(true)}>
+                Edit
+              </button>
             ) : (
-              <button onClick={taskChange} disabled={loading}>
+              <button
+                className="button"
+                onClick={taskChange}
+                disabled={loading}
+              >
                 Save
               </button>
             )}

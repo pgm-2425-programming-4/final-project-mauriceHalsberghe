@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TaskModal } from "./TaskModal";
 
-export default function GroupedStatus({ tasks, statuses }) {
+export default function GroupedStatus({ tasks: initialTasks, statuses }) {
+  const [tasks, setTasks] = useState(initialTasks);
+  const [selectedTask, setSelectedTask] = useState(null);
+
+  useEffect(() => {
+    setTasks(initialTasks); 
+  }, [initialTasks]);
+
   const groupedByStatus = groupTasksByStatus(tasks);
 
-  const [selectedTask, setSelectedTask] = useState(null);
+  const updateTask = (updatedTask) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((t) => (t.id === updatedTask.id ? updatedTask : t))
+    );
+    setSelectedTask(null);
+  }
+
+  const closeModal = () => {
+    setSelectedTask(null);
+  };
 
   return (
     <div className="main__content">
@@ -39,16 +55,21 @@ export default function GroupedStatus({ tasks, statuses }) {
           <h3>No Status</h3>
           <ul>
             {groupedByStatus["no-status"].map((task) => (
-              <li key={task.id}>{task.title}</li>
+              <li key={task.id} onClick={() => setSelectedTask(task)}>
+                {task.title}
+              </li>
             ))}
           </ul>
         </div>
       )}
 
-      <TaskModal task={selectedTask} onClose={() => setSelectedTask(null)} />
+      {selectedTask && (
+        <TaskModal task={selectedTask} onClose={closeModal} onSave={updateTask}/>
+      )}
     </div>
   );
 }
+
 
 function groupTasksByStatus(tasks) {
   const grouped = {};
