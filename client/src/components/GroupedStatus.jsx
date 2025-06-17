@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TaskModal } from "./TaskModal";
+import { EditTaskModal } from "./EditTaskModal";
 
 export default function GroupedStatus({ tasks: initialTasks, statuses }) {
   const [tasks, setTasks] = useState(initialTasks);
@@ -72,7 +72,7 @@ export default function GroupedStatus({ tasks: initialTasks, statuses }) {
       )}
 
       {selectedTask && (
-        <TaskModal
+        <EditTaskModal
           task={selectedTask}
           onClose={closeModal}
           onSave={updateTask}

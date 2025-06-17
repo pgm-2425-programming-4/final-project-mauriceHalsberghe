@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchTasksStatuses } from "../queries/fetch-tasks-statuses";
 import { updateTask } from "../queries/update-task";
 
-export function TaskModal({ task, onClose, onSave }) {
+export function EditTaskModal({ task, onClose, onSave }) {
   const [statuses, setStatuses] = useState([]);
   const [selectedStatusId, setSelectedStatusId] = useState(
     task?.task_status?.id ?? ""
