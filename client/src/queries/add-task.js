@@ -1,9 +1,9 @@
 import { API_URL, API_TOKEN } from "../constants/constants";
 
-export async function updateTask(taskId, newStatusId, data) {
+export async function addTask(statusId, data) {
   
-  const response = await fetch(`${API_URL}/tasks/${taskId}`, {
-    method: "PUT",
+  const response = await fetch(`${API_URL}/tasks`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${API_TOKEN}`,
@@ -12,16 +12,16 @@ export async function updateTask(taskId, newStatusId, data) {
       data: {
         title: data.title,
         description: data.description,
-        task_status: newStatusId,
+        task_status: statusId,
         project: data.project,
-        task_labels: data.labels, 
+        task_labels: data.labels,
       },
     }),
   });
-
+  
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.error?.message || "error update task");
+    throw new Error(errorData.error?.message || "error adding task");
   }
 
   return await response.json();
