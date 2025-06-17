@@ -13,6 +13,7 @@ export async function updateTask(taskId, newStatusId, data) {
         title: data.title,
         description: data.description,
         task_status: newStatusId,
+        task_labels: data.labels.map((id) => ({ id })),
       }
     }),
   });

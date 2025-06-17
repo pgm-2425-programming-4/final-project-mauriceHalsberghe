@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { fetchTasksStatuses } from "../queries/fetch-tasks-statuses";
 import { updateTask } from "../queries/update-task";
+import { fetchLabels } from "../queries/fetch-labels";
 
 export function EditTaskModal({ task, onClose, onSave }) {
   const [statuses, setStatuses] = useState([]);
   const [selectedStatusId, setSelectedStatusId] = useState(
     task?.task_status?.id ?? ""
   );
+  const [labels, setLabels] = useState([]);
+  const [selectedLabelIds, setSelectedLabelIds] = useState([]);
+
   const [title, setTitle] = useState(task?.title ?? "");
   const [description, setDescription] = useState(task?.description || "");
   const [isEditing, setIsEditing] = useState(false);
@@ -14,11 +18,17 @@ export function EditTaskModal({ task, onClose, onSave }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    async function fetchStatuses() {
-      const data = await fetchTasksStatuses();
-      setStatuses(data);
+    async function fetchData() {
+      const [statusData, labelData] = await Promise.all([
+        fetchTasksStatuses(),
+        fetchLabels(),
+      ]);
+      console.log(labelData);
+      setStatuses(statusData);
+      setLabels(labelData);
     }
-    fetchStatuses();
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -26,56 +36,67 @@ export function EditTaskModal({ task, onClose, onSave }) {
       setTitle(task.title);
       setDescription(task.description || "");
       setSelectedStatusId(task.task_status?.id ?? "");
+      setSelectedLabelIds(task.task_labels?.map((l) => l.id) || []);
     }
   }, [task]);
 
-const taskChange = async () => {
-  if (!title || !selectedStatusId) {
-    setError("title is required.");
-    return;
-  }
+  const toggleLabel = (labelId) => {
+    setSelectedLabelIds((prev) =>
+      prev.includes(labelId)
+        ? prev.filter((id) => id !== labelId)
+        : [...prev, labelId]
+    );
+  };
 
-  setLoading(true);
-  setError("");
-
-  try {
-    await updateTask(task.documentId, selectedStatusId, {
-    title,
-    description,
-    });
-
-    const fullUpdatedTask = {
-      ...task,
-      title,
-      description,
-      task_status: {
-        id: selectedStatusId,
-        name: statuses.find((s) => s.id === selectedStatusId)?.name || "",
-      },
-    };
-
-    if (onSave) {
-      onSave(fullUpdatedTask);
+  const taskChange = async () => {
+    if (!title || !selectedStatusId) {
+      setError("title is required.");
+      return;
     }
 
-    setIsEditing(false);
-  } catch (err) {
-    console.error("Error updating task:", err);
-    setError("Failed to update task.");
-  } finally {
-    setLoading(false);
-  }
-};
+    setLoading(true);
+    setError("");
 
+    try {
+      await updateTask(task.documentId, selectedStatusId, {
+        title,
+        description,
+        labels: selectedLabelIds,
+      });
 
-  if (!task) {
+      const fullUpdatedTask = {
+        ...task,
+        title,
+        description,
+        task_status: {
+          id: selectedStatusId,
+          name: statuses.find((s) => s.id === selectedStatusId)?.name || "",
+        },
+        task_labels: labels.filter((label) =>
+          selectedLabelIds.includes(label.id)
+        ),
+      };
+
+      if (onSave) {
+        onSave(fullUpdatedTask);
+      }
+
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Error updating task:", err);
+      setError("Failed to update task.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!task || labels.length === 0) {
     return null;
   }
 
   return (
     <div className="modal">
       <div className="modal-bg" onClick={onClose}></div>
-
       <div className="modal__card">
         <button className="button button--close" onClick={onClose}>
           <img src="/xmark-solid.svg" alt="Close" />
@@ -113,6 +134,30 @@ const taskChange = async () => {
                 </option>
               ))}
             </select>
+          </div>
+
+          <div>
+            <label>Labels</label>
+            <div className="modal__labels">
+              {labels.map((label) => {
+                const isSelected = selectedLabelIds.includes(label.id);
+                return (
+                  <button
+                    key={label.id}
+                    type="button"
+                    className={`button ${isSelected ? "selected" : ""} ${
+                      !isEditing ? "disabled" : ""
+                    }`}
+                    onClick={
+                      isEditing ? () => toggleLabel(label.id) : undefined
+                    }
+                    disabled={!isEditing}
+                  >
+                    {label.name}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {error && <p className="error">{error}</p>}
