@@ -3,7 +3,7 @@ import GroupedStatus from "./GroupedStatus";
 import { Link } from "@tanstack/react-router";
 import { AddTaskModal } from "./AddTaskModal";
 
-export default function GroupedTasks({ tasks, statuses }) {
+export default function GroupedTasks({ tasks, statuses, labels }) {
   const grouped = groupTasksByProject(tasks);
 
   return (
@@ -13,15 +13,18 @@ export default function GroupedTasks({ tasks, statuses }) {
           key={projectId}
           project={project}
           tasks={tasks}
-          statuses={statuses} />
+          statuses={statuses}
+          labels={labels}
+        />
       ))}
     </>
   );
 }
 
-function ProjectTasks({ project, tasks:initialTasks, statuses }) {
+function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
   const [showModal, setShowModal] = useState(false);
   const [tasks, setTasks] = useState(initialTasks);
+  const [selectedLabel, setSelectedLabel] = useState("");
 
   const handleAddClick = () => {
     setShowModal(true);
@@ -32,18 +35,41 @@ function ProjectTasks({ project, tasks:initialTasks, statuses }) {
   };
 
   const handleSave = (newTask) => {
-    setTasks(prev => [...prev, newTask]);
+    setTasks((prev) => [...prev, newTask]);
     setShowModal(false);
   };
 
+  const filteredTasks = selectedLabel
+    ? tasks.filter((task) =>
+        task.task_labels?.some((label) => label.id === Number(selectedLabel))
+      )
+    : tasks;
+
   return (
     <>
-      <header className='header'>
-        <h2 className='header__title'>{project.title}</h2>
-        <Link to={`/projects/${project.documentId}/backlog`} className="header__link">View backlog</Link>
-        <button className="button" onClick={handleAddClick}>Add new Task</button>
+      <header className="header">
+        <select value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
+          <option value="">All Labels</option>
+          {labels.map((label) => (
+            <option key={label.id} value={label.id}>
+              {label.name}
+            </option>
+          ))}
+        </select>
+        <h2 className="header__title">{project.title}</h2>
+        <Link
+          to={`/projects/${project.documentId}/backlog`}
+          className="header__link"
+        >
+          View backlog
+        </Link>
+        <button className="button" onClick={handleAddClick}>
+          Add new Task
+        </button>
       </header>
-      <GroupedStatus tasks={tasks} statuses={statuses} />
+
+      <GroupedStatus tasks={filteredTasks} statuses={statuses} />
+
       {showModal && (
         <AddTaskModal
           task={null}
@@ -56,16 +82,15 @@ function ProjectTasks({ project, tasks:initialTasks, statuses }) {
   );
 }
 
-
 function groupTasksByProject(tasks) {
   const grouped = {};
 
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     const projectId = task.project.id;
     if (!grouped[projectId]) {
       grouped[projectId] = {
         project: task.project,
-        tasks: []
+        tasks: [],
       };
     }
     grouped[projectId].tasks.push(task);
