@@ -133,6 +133,7 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  cursor: pointer;
 
   .card__title {
     font-size: 1.2rem;
@@ -267,7 +268,7 @@ ul {
   }
 
   .modal__card {
-    position: relative;
+    position: fixed;
     z-index: 3;
     background-color: var(--bg-300);
     width: 25rem;
@@ -287,21 +288,36 @@ ul {
           font-size: 1rem;
           color: var(--text-200);
         }
+
         input,
         textarea,
         select {
           background-color: transparent;
-          border: 1px solid var(--text-100);
+          border: 2px solid var(--primary-200);
           padding: 0.5rem;
           border-radius: var(--border-radius);
+          pointer-events: auto;
+          &:focus-visible {
+            outline: none;
+          }
+        }
+
+        select:disabled {
+          border: 2px solid var(--text-100);
+        }
+
+        input,
+        textarea {
           &:read-only {
             cursor: default;
+            border: 2px solid var(--text-100);
           }
         }
         textarea {
           resize: vertical;
           height: 4rem;
         }
+
         option {
           background-color: var(--bg-300);
         }
