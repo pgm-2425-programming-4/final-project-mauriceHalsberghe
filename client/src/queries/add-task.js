@@ -1,6 +1,7 @@
 import { API_URL, API_TOKEN } from "../constants/constants";
 
 export async function addTask(statusId, data) {
+  console.log(data);
   
   const response = await fetch(`${API_URL}/tasks`, {
     method: "POST",
@@ -13,6 +14,7 @@ export async function addTask(statusId, data) {
         title: data.title,
         description: data.description,
         task_status: statusId,
+        project: data.project,
       }
     }),
   });
