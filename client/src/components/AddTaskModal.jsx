@@ -95,9 +95,13 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
       <div className="modal-bg" onClick={onClose}></div>
 
       <div className="modal__card">
-        <button className="button button--close" onClick={onClose}>
-          <img src="/xmark-solid.svg" alt="Close" />
-        </button>
+
+        <div className="modal__header">
+          <h2 className="modal__title">Add new task</h2>
+          <button className="button button--close" onClick={onClose}>
+            <img src="/xmark-solid.svg" alt="Close" />
+          </button>
+        </div>
 
         <div className="modal__content">
           <div>
@@ -144,7 +148,7 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
                   <button
                     key={label.id}
                     type="button"
-                    className={`button ${isSelected ? "selected" : ""}`}
+                    className={`button button--label ${isSelected ? "selected" : ""}`}
                     onClick={() => toggleLabel(label.id)}
                   >
                     {label.name}
@@ -157,7 +161,10 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
           {error && <p className="error">{error}</p>}
           {loading && <p>Saving</p>}
 
-          <div className="modal__actions">
+          <div className="modal__buttons">
+            <button className="button" onClick={onClose}>
+              Cancel
+            </button>
             <button className="button" onClick={taskAdd} disabled={loading}>
               Save
             </button>

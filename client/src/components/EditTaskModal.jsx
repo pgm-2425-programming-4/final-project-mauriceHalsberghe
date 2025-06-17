@@ -98,9 +98,12 @@ export function EditTaskModal({ task, onClose, onSave }) {
     <div className="modal">
       <div className="modal-bg" onClick={onClose}></div>
       <div className="modal__card">
-        <button className="button button--close" onClick={onClose}>
-          <img src="/xmark-solid.svg" alt="Close" />
-        </button>
+        <div className="modal__header">
+          <h2 className="modal__title">Edit Task</h2>
+          <button className="button button--close" onClick={onClose}>
+            <img src="/xmark-solid.svg" alt="Close" />
+          </button>
+        </div>
 
         <div className="modal__content">
           <div>
@@ -145,7 +148,7 @@ export function EditTaskModal({ task, onClose, onSave }) {
                   <button
                     key={label.id}
                     type="button"
-                    className={`button ${isSelected ? "selected" : ""} ${
+                    className={`button button--label ${isSelected ? "selected" : ""} ${
                       !isEditing ? "disabled" : ""
                     }`}
                     onClick={
@@ -163,7 +166,10 @@ export function EditTaskModal({ task, onClose, onSave }) {
           {error && <p className="error">{error}</p>}
           {loading && <p>Saving</p>}
 
-          <div className="modal__actions">
+          <div className="modal__buttons">
+            <button className="button" onClick={onClose}>
+              Cancel
+            </button>
             {!isEditing ? (
               <button className="button" onClick={() => setIsEditing(true)}>
                 Edit
