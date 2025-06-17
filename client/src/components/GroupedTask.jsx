@@ -48,14 +48,16 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
   return (
     <>
       <header className="header">
-        <select value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
-          <option value="">All Labels</option>
-          {labels.map((label) => (
-            <option key={label.id} value={label.id}>
-              {label.name}
-            </option>
-          ))}
-        </select>
+        <div className="header__filters">
+          <select className="header__select" value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
+            <option value="">All Labels</option>
+            {labels.map((label) => (
+              <option key={label.id} value={label.id}>
+                {label.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <h2 className="header__title">{project.title}</h2>
         <Link
           to={`/projects/${project.documentId}/backlog`}
