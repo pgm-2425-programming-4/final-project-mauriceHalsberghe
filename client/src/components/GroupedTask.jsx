@@ -25,6 +25,8 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
   const [showModal, setShowModal] = useState(false);
   const [tasks, setTasks] = useState(initialTasks);
   const [selectedLabel, setSelectedLabel] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
 
   const handleAddClick = () => {
     setShowModal(true);
@@ -39,11 +41,17 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
     setShowModal(false);
   };
 
-  const filteredTasks = selectedLabel
-    ? tasks.filter((task) =>
-        task.task_labels?.some((label) => label.id === Number(selectedLabel))
-      )
-    : tasks;
+  const filteredTasks = tasks.filter((task) => {
+    const matchesLabel = selectedLabel
+      ? task.task_labels?.some((label) => label.id === Number(selectedLabel))
+      : true;
+
+    const matchesSearch = searchTerm.trim()
+      ? task.title.toLowerCase().includes(searchTerm.toLowerCase())
+      : true;
+
+    return matchesLabel && matchesSearch;
+  });
 
   return (
     <>
@@ -57,6 +65,12 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
               </option>
             ))}
           </select>
+          <input
+            className="header__input"
+            placeholder="Filter name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
         <h2 className="header__title">{project.title}</h2>
         <Link

@@ -88,8 +88,9 @@ ul {
 
   .header__filters {
     display: flex;
-
-    .header__select {
+    gap: 1rem;
+    .header__select,
+    .header__input {
       border: 1px solid var(--text-100);
       padding: 0.5rem;
       border-radius: var(--border-radius);
@@ -98,6 +99,7 @@ ul {
         background-color: var(--bg-300);
       }
     }
+
   }
 
   .header__title {
