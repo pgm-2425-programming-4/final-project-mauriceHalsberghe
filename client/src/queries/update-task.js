@@ -13,11 +13,12 @@ export async function updateTask(taskId, newStatusId, data) {
         title: data.title,
         description: data.description,
         task_status: newStatusId,
-        task_labels: data.labels.map((id) => ({ id })),
-      }
+        project: data.project,
+        task_labels: data.labels, 
+      },
     }),
   });
-  
+
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.error?.message || "error update task");
