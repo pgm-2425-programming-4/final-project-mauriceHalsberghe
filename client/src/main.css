@@ -1,3 +1,13 @@
+@import url('./styles/aside.css');
+@import url('./styles/backlog.css');
+@import url('./styles/button.css');
+@import url('./styles/card.css');
+@import url('./styles/header.css');
+@import url('./styles/modal.css');
+@import url('./styles/pagination.css');
+@import url('./styles/status.css');
+
+
 :root {
   --primary-100: #0085ff;
   --primary-200: #69b4ff;
