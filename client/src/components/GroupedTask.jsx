@@ -56,7 +56,7 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
   return (
     <>
       <header className="header">
-        <div className="header__filters">
+        <div className="header__content">
           <select className="header__select" value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
             <option value="">All Labels</option>
             {labels.map((label) => (
@@ -72,16 +72,20 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
+
         <h2 className="header__title">{project.title}</h2>
-        <Link
-          to={`/projects/${project.documentId}/backlog`}
-          className="header__link"
-        >
-          View backlog
-        </Link>
-        <button className="button" onClick={handleAddClick}>
-          Add new Task
-        </button>
+
+        <div className="header__content">
+          <Link
+            to={`/projects/${project.documentId}/backlog`}
+            className="header__link"
+          >
+            View backlog
+          </Link>
+          <button className="button" onClick={handleAddClick}>
+            Add new Task
+          </button>
+        </div>
       </header>
 
       <GroupedStatus tasks={filteredTasks} statuses={statuses} />

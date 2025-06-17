@@ -86,8 +86,9 @@ ul {
   border-radius: var(--border-radius);
   height: 4rem;
 
-  .header__filters {
+  .header__content {
     display: flex;
+    align-items: center;
     gap: 1rem;
     .header__select,
     .header__input {
