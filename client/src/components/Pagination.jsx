@@ -4,7 +4,7 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
     return (
       <li key={i} className="pagination__item">
       <button 
-        className={`pagination__button ${currentPage === i ? 'is-current' : ''}`} 
+        className={`button ${currentPage === i ? 'is-current' : ''}`} 
         aria-label={`Go to page ${i}`}
         onClick={() => {onPageChanged(i)}} 
       >
@@ -66,7 +66,7 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
 
         <button
           onClick={() => onPageChanged(currentPage - 1)}
-          className="pagination__button"
+          className="button"
           disabled={currentPage === 1}
         >
           Previous page
@@ -74,7 +74,7 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
 
         <button
           onClick={() => onPageChanged(currentPage + 1)}
-          className="pagination__button"
+          className="button"
           disabled={currentPage === pageCount}
         >
           Next page

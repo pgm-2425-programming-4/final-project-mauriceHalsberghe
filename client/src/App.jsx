@@ -1,7 +1,5 @@
 import { StrictMode, useState } from "react";
-import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Tasks } from "./components/Tasks.jsx";
 import { ProjectSelector } from "./components/ProjectSelector.jsx";
 
 const queryClient = new QueryClient();

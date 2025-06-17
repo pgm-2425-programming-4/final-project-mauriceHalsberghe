@@ -1,7 +1,7 @@
 import { createFileRoute, notFound, Link } from '@tanstack/react-router'
 import { fetchTasks } from '../../../queries/fetch-tasks-by-projectid'
 import { fetchTasksStatuses } from '../../../queries/fetch-tasks-statuses';
-import GroupedTasks from '../../../components/GroupedTask'
+import GroupedTask from '../../../components/GroupedTask'
 
 
 export const Route = createFileRoute('/projects/$projectId/')({
@@ -27,7 +27,7 @@ function Tasks() {
 
   return (
     <section className='main'>
-      <GroupedTasks tasks={tasks} statuses={statuses} />
+      <GroupedTask tasks={tasks} statuses={statuses} />
     </section>
   );
 }
