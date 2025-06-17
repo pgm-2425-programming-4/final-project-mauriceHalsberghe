@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--bg-300);
+  border-radius: var(--border-radius);
+  height: 4rem;
+
+  .header__content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .header__select,
+    .header__input {
+      border: 1px solid var(--text-100);
+      padding: 0.5rem;
+      border-radius: var(--border-radius);
+      background-color: transparent;
+      option {
+        background-color: var(--bg-300);
+      }
+    }
+
+  }
+
+  .header__title {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .header__link {
+    padding: 0.5rem;
+    background-color: var(--primary-100);
+    border-radius: var(--border-radius);
+    &:hover {
+      background-color: var(--primary-200);
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.backlog {
+  padding-left: 6rem;
+  height: 100%;
+
+  .backlog__title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+
+  .backlog__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+}
