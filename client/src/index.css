@@ -86,6 +86,23 @@ ul {
   border-radius: var(--border-radius);
   height: 4rem;
 
+  .header__content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .header__select,
+    .header__input {
+      border: 1px solid var(--text-100);
+      padding: 0.5rem;
+      border-radius: var(--border-radius);
+      background-color: transparent;
+      option {
+        background-color: var(--bg-300);
+      }
+    }
+
+  }
+
   .header__title {
     font-size: 1.2rem;
     margin: 0;
