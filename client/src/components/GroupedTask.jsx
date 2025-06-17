@@ -13,15 +13,15 @@ export default function GroupedTasks({ tasks, statuses }) {
           key={projectId}
           project={project}
           tasks={tasks}
-          statuses={statuses}
-        />
+          statuses={statuses} />
       ))}
     </>
   );
 }
 
-function ProjectTasks({ project, tasks, statuses }) {
+function ProjectTasks({ project, tasks:initialTasks, statuses }) {
   const [showModal, setShowModal] = useState(false);
+  const [tasks, setTasks] = useState(initialTasks);
 
   const handleAddClick = () => {
     setShowModal(true);
@@ -32,7 +32,7 @@ function ProjectTasks({ project, tasks, statuses }) {
   };
 
   const handleSave = (newTask) => {
-    console.log("new task:",newTask);
+    setTasks(prev => [...prev, newTask]);
     setShowModal(false);
   };
 
@@ -41,7 +41,7 @@ function ProjectTasks({ project, tasks, statuses }) {
       <header className='header'>
         <h2 className='header__title'>{project.title}</h2>
         <Link to={`/projects/${project.documentId}/backlog`} className="header__link">View backlog</Link>
-        <button className="button" onClick={handleAddClick}>+ Add Task</button>
+        <button className="button" onClick={handleAddClick}>Add new Task</button>
       </header>
       <GroupedStatus tasks={tasks} statuses={statuses} />
       {showModal && (

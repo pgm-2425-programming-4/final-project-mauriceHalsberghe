@@ -17,7 +17,12 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
     async function fetchStatuses() {
       const data = await fetchTasksStatuses();
       setStatuses(data);
+
+      if (!task && data.length > 0) {
+        setSelectedStatusId(data[0].id);
+      }
     }
+
     fetchStatuses();
   }, []);
 
@@ -30,7 +35,6 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
   }, [task]);
 
   const taskAdd = async () => {
-    
     if (!title) {
       setError("Title is required.");
       return;
@@ -45,7 +49,7 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
         title,
         description,
         project: projectId,
-        status: selectedStatusId
+        status: selectedStatusId,
       });
 
       newTask = {
@@ -61,7 +65,7 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
       }
     } catch (err) {
       console.error("Error updating task:", err);
-      setError("Failed to update task.");
+      setError("Failed to add task.");
     } finally {
       setLoading(false);
     }
@@ -100,7 +104,7 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
           <div>
             <label>Status</label>
             <select
-              value="2"
+              value={selectedStatusId}
               onChange={(e) => setSelectedStatusId(e.target.value)}
               disabled={!isEditing}
             >
