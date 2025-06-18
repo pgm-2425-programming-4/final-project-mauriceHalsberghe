@@ -265,3 +265,9 @@
 .modal__card--note {
   margin-top: 2rem;
 }
+
+@media (max-width: 800px) {
+  .modal__card {
+    width: 20rem;
+  }
+}

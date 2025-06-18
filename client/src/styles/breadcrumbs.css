@@ -49,3 +49,16 @@
     }
   }
 }
+
+@media (max-width: 1200px) {
+  .breadcrumbs {
+    width: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .breadcrumbs {
+    padding-right: 24px;
+    overflow-x: hidden;
+  }
+}

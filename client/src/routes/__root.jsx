@@ -38,7 +38,9 @@ function Navigation() {
         <Link className="aside__link" to="/">
           Home
         </Link>
-        <p className="aside__subtitle">Projects</p>
+        <Link className="aside__link" to="/about">
+          About
+        </Link>
         <ul className="aside__list">
           {data.map((project) => (
             <li className="aside__item" key={project.id}>
@@ -51,16 +53,19 @@ function Navigation() {
             </li>
           ))}
         </ul>
-        <p className="aside__subtitle">Info</p>
-        <Link className="aside__link" to="/about">
-          About
-        </Link>
 
         <div className="aside__new-project">
           <label className="aside__label">New Project:</label>
-          <input className="aside__input" id="new-project" value={newProjectTitle}
-            onChange={(e) => setNewProjectTitle(e.target.value)} placeholder="Project name" />
-          <button className="button button--aside" onClick={handleAddProject}>Add</button>
+          <input
+            className="aside__input"
+            id="new-project"
+            value={newProjectTitle}
+            onChange={(e) => setNewProjectTitle(e.target.value)}
+            placeholder="Project name"
+          />
+          <button className="button button--aside" onClick={handleAddProject}>
+            Add
+          </button>
         </div>
       </nav>
 
