@@ -117,6 +117,7 @@
 
     .modal__select {
       select {
+        cursor: pointer;
         padding: 2px 30px 2px 3px;
         font-size: 16px !important;
         color: black !important;
@@ -135,6 +136,9 @@
           font-size: 16px !important;
           color: black !important;
           background-color: #ddd;
+        }
+        &:disabled {
+          cursor: default;
         }
       }
     }
