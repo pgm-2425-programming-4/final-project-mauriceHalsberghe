@@ -12,7 +12,6 @@ function RouteComponent() {
     queryKey: ["users"],
     queryFn: fetchProjects,
   });
-  console.log(data);
   
 
   if (isLoading) return <p>Loading...</p>;
