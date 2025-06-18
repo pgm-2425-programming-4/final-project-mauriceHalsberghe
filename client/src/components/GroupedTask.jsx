@@ -59,9 +59,9 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
         <div className="header__row">
           <div className="breadcrumbs">
               <img className="breadcrumbs__img" src="/assets/shell32_264.ico"/>
-              <h2 className="breadcrumbs__title">Kanban</h2>
-              <h2 className="breadcrumbs__title">Projects</h2>
-              <h2 className="breadcrumbs__title">{project.title}</h2>
+              <Link className="breadcrumbs__title" to={'/'}>Kanban</Link>
+              <Link className="breadcrumbs__title" to={'/projects'}>Projects</Link>
+              <Link className="breadcrumbs__title" to={'./'}>{project.title}</Link>
           </div>
           
           <div className="header__content">

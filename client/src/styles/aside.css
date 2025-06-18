@@ -1,9 +1,8 @@
 .aside {
   position: fixed;
-  bottom: 0;
-  left: 0;
   min-width: 12rem;
-  height: calc(100vh - 8rem);
+  height: calc(100vh - 6rem);
+  margin: 2rem;
   padding: 10px;
   padding-top: 2rem;
   display: flex;
@@ -11,7 +10,7 @@
   gap: 32px;
 
   background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px;
   backdrop-filter: blur(4px);
   border: 1px solid white;
 

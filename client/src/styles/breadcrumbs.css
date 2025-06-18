@@ -26,9 +26,18 @@
   .breadcrumbs__title {
     position: relative;
     margin: 0;
+    padding: 0 3px;
     color: black;
     font-size: 16px;
     font-weight: 400;
+    &:hover {
+      background: linear-gradient(180deg, #e5f4fd 45%, #b3e0f9 0);
+      box-shadow: 0 0 0 1px #72a2c5;
+    }
+    &:active {
+      background: linear-gradient(180deg, #cee9f8 45%, #86c6e8 0);
+    }
+
     &::after {
       content: url("../../public/assets/arrow-right.svg");
       position: absolute;
