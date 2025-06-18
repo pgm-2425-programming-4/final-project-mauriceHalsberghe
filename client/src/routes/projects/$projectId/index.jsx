@@ -13,7 +13,7 @@ export const Route = createFileRoute('/projects/$projectId/')({
       fetchTasksLabels(),
     ]);
 
-    if (!tasks || tasks.length === 0) {
+    if (!tasks) {
       throw notFound();
     }
 

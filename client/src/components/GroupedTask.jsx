@@ -5,6 +5,7 @@ import { AddTaskModal } from "./AddTaskModal";
 
 export default function GroupedTasks({ tasks, statuses, labels }) {
   const grouped = groupTasksByProject(tasks);
+  
 
   return (
     <>

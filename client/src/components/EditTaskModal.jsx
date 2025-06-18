@@ -23,7 +23,6 @@ export function EditTaskModal({ task, onClose, onSave }) {
         fetchTasksStatuses(),
         fetchLabels(),
       ]);
-      console.log(labelData);
       setStatuses(statusData);
       setLabels(labelData);
     }
