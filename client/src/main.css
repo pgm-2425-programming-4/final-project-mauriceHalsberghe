@@ -6,6 +6,7 @@
 @import url('./styles/modal.css');
 @import url('./styles/pagination.css');
 @import url('./styles/status.css');
+@import url('./styles/breadcrumbs.css');
 
 
 :root {
@@ -25,8 +26,8 @@
 
 * {
   color: var(--text-100);
-  font-family: Outfit, sans-serif;
-  font-weight: 300;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
+
   font-size: 1.2rem;
   transition: color 200ms ease;
 }
@@ -69,9 +70,4 @@ ul {
   display: flex;
   flex-direction: column;
   padding-left: 2rem;
-}
-
-.selected {
-  background-color: var(--primary-200);
-  color: var(--bg-100) !important;
 }

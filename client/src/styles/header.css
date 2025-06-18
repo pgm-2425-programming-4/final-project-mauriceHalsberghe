@@ -1,10 +1,16 @@
 .header {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.7);
+  position: relative;
+  z-index: 2;
+
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(2px);
+  
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--bg-300);
-  border-radius: var(--border-radius);
-  height: 4rem;
 
   .header__content {
     display: flex;
@@ -20,7 +26,6 @@
         background-color: var(--bg-300);
       }
     }
-
   }
 
   .header__title {

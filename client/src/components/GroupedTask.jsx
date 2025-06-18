@@ -56,6 +56,14 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
   return (
     <>
       <header className="header">
+
+        <div className="breadcrumbs">
+            <img className="breadcrumbs__img" src="/assets/shell32_264.ico"/>
+            <h2 className="breadcrumbs__title">Kanban</h2>
+            <h2 className="breadcrumbs__title">Projects</h2>
+            <h2 className="breadcrumbs__title">{project.title}</h2>
+        </div>
+        
         <div className="header__content">
           <select className="header__select" value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
             <option value="">All Labels</option>
@@ -73,7 +81,6 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
           />
         </div>
 
-        <h2 className="header__title">{project.title}</h2>
 
         <div className="header__content">
           <Link
