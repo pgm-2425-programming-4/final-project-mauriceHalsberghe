@@ -7,6 +7,8 @@
 @import url('./styles/pagination.css');
 @import url('./styles/status.css');
 @import url('./styles/breadcrumbs.css');
+@import url('./styles/error.css');
+
 
 
 :root {
@@ -33,12 +35,12 @@
 
 body {
   margin: 0;
-  height: 100vh; /* Ensures body fills the viewport height */
+  height: 100vh;
   background-image: url('../public/assets/background.png');
-  background-size: cover;             /* Make the image cover the entire screen */
-  background-repeat: no-repeat;       /* Prevent tiling */
-  background-attachment: fixed;       /* Prevent background from scrolling */
-  background-position: center center; /* Center it nicely */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center; 
 }
 a {
   color: black;
@@ -52,7 +54,6 @@ ul {
 }
 
 #root {
-  //padding: 2rem;
   display: flex;
 }
 
@@ -71,4 +72,16 @@ ul {
   display: flex;
   flex-direction: column;
   padding-left: 2rem;
+}
+
+@media (max-width: 800px) {
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+  .main {
+    margin-left: 0;
+    margin-top: 5rem;
+    width: auto;
+  }
 }

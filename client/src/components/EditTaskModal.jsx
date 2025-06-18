@@ -23,7 +23,6 @@ export function EditTaskModal({ task, onClose, onSave }) {
         fetchTasksStatuses(),
         fetchLabels(),
       ]);
-      console.log(labelData);
       setStatuses(statusData);
       setLabels(labelData);
     }
@@ -100,7 +99,7 @@ export function EditTaskModal({ task, onClose, onSave }) {
       <div className="modal__card">
         <div className="modal__header">
           <h2 className="modal__title">
-            <img src="../assets/iexplore_32542.ico"/>
+            <img src="/assets/iexplore_32542.ico"/>
             Edit Task
             </h2>
           <div className="header__button">

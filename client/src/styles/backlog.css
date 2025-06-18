@@ -68,15 +68,14 @@
 
       &:nth-child(2),
       &:nth-child(3) {
-
         &:after {
           position: absolute;
           left: -8px;
           top: -4px;
-          content: '';
+          content: "";
           width: 1px;
           height: 16px;
-          background-color: #C2D1E1 ;
+          background-color: #c2d1e1;
         }
       }
     }
@@ -93,6 +92,7 @@
       position: relative;
       display: flex;
       padding: 3px 2px 3px 24px;
+      cursor: pointer;
 
       p {
         margin: 0;
@@ -127,6 +127,48 @@
         background-image: url("../../public/assets/shell32_264.ico");
         background-size: contain;
         background-repeat: no-repeat;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .backlog__header {
+    p {
+      &:nth-child(2) {
+        right: 0 !important;
+      }
+      &:nth-child(3) {
+        display: none;
+      }
+    }
+  }
+
+  .backlog__item {
+    p {
+      &:nth-child(2) {
+        right: -2rem !important;
+      }
+      &:nth-child(3) {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .backlog__header {
+    p {
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+
+  .backlog__item {
+    p {
+      &:nth-child(2) {
+        display: none;
       }
     }
   }
