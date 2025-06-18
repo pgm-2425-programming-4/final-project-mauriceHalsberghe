@@ -56,10 +56,11 @@ function Navigation() {
           About
         </Link>
 
-        <div>
-          <input id="new-project" value={newProjectTitle}
-            onChange={(e) => setNewProjectTitle(e.target.value)}/>
-          <button onClick={handleAddProject}>Add</button>
+        <div className="aside__new-project">
+          <label className="aside__label">New Project:</label>
+          <input className="aside__input" id="new-project" value={newProjectTitle}
+            onChange={(e) => setNewProjectTitle(e.target.value)} placeholder="Project name" />
+          <button className="button button--aside" onClick={handleAddProject}>Add</button>
         </div>
       </nav>
 

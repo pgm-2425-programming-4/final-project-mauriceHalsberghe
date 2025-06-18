@@ -7,8 +7,6 @@ export default function GroupedTasks({ tasks, statuses, labels, project }) {
   const grouped = groupTasksByProject(tasks);
   
   const hasGroups = Object.keys(grouped).length > 0;
-
-  console.log(project);
   
   if (hasGroups) {
     return (
