@@ -99,7 +99,10 @@ export function EditTaskModal({ task, onClose, onSave }) {
       <div className="modal-bg" onClick={onClose}></div>
       <div className="modal__card">
         <div className="modal__header">
-          <h2 className="modal__title">Edit Task</h2>
+          <h2 className="modal__title">
+            <img src="../assets/iexplore_32542.ico"/>
+            Edit Task
+            </h2>
           <div className="header__button">
             <button className="button button--close" onClick={onClose}>
             </button>

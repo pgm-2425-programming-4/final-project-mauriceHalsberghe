@@ -61,7 +61,11 @@ ul {
   margin-left: 15rem;
   padding: 2rem;
   width: 100%;
+}
 
+.main__content--note {
+ display: block;
+ position: relative; 
 }
 
 .main:has(.backlog) {
