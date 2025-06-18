@@ -34,9 +34,11 @@ export default function GroupedStatus({ tasks: initialTasks, statuses }) {
 
   return (
     <div className="main__content">
-      {sortedStatuses.map((status) => (
+      {sortedStatuses.map((status, index) => (
         <div className="status" key={status.id}>
-          <h3 className="status__title">{status.name}</h3>
+          <h3 className={`status__title status__title--${index}`}>
+            {status.name}
+          </h3>
           <ul className="status__list">
             {(groupedByStatus[status.id] || []).map((task) => (
               <li

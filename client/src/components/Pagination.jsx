@@ -48,7 +48,7 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
     <>
       <nav className="pagination" role="navigation" aria-label="pagination">
         <select
-          className="pagination__select"
+          className="button pagination__select"
           value={pageSize}
           onChange={(event) => {
             const selectedValue = event.target.value;
@@ -66,7 +66,7 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
 
         <button
           onClick={() => onPageChanged(currentPage - 1)}
-          className="button"
+          className="button button--prev"
           disabled={currentPage === 1}
         >
           Previous page
@@ -74,7 +74,7 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
 
         <button
           onClick={() => onPageChanged(currentPage + 1)}
-          className="button"
+          className="button button--next"
           disabled={currentPage === pageCount}
         >
           Next page

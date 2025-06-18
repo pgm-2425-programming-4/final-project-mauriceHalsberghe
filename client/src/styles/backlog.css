@@ -1,0 +1,133 @@
+.backlog {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.7);
+  position: relative;
+  height: fit-content;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  margin-bottom: 4rem;
+
+  .backlog__title {
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    padding: 3px;
+    padding-left: 28px;
+    position: relative;
+    text-shadow:
+      0 0 10px #ffffff7b,
+      0 0 10px #ffffff7b,
+      0 0 10px #ffffff7b,
+      0 0 10px #ffffff7b,
+      0 0 10px #ffffff7b,
+      0 0 10px #ffffff7b,
+      0 0 10px #ffffff7b,
+      0 0 10px #ffffff7b;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      background-image: url("../../public/assets/AdmTmpl_4.ico");
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .backlog__content {
+    background-color: #f0f0f0;
+    margin: 0 10px 10px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 1px 0.5px #fff;
+    padding: 4px 16px;
+  }
+  .backlog__header {
+    display: flex;
+    width: 100%;
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #4e5a6b;
+      position: relative;
+
+      &:nth-child(2) {
+        position: absolute;
+        right: calc(350px + 6rem);
+        width: 10rem;
+        right: 350px;
+      }
+      &:nth-child(3) {
+        position: absolute;
+        right: 0;
+        width: 350px;
+      }
+
+      &:nth-child(2),
+      &:nth-child(3) {
+
+        &:after {
+          position: absolute;
+          left: -8px;
+          top: -4px;
+          content: '';
+          width: 1px;
+          height: 16px;
+          background-color: #C2D1E1 ;
+        }
+      }
+    }
+  }
+
+  .backlog__list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    gap: 0.5rem;
+
+    .backlog__item {
+      position: relative;
+      display: flex;
+      padding: 3px 2px 3px 24px;
+
+      p {
+        margin: 0;
+
+        &:nth-child(2) {
+          color: #727274;
+          position: absolute;
+          min-width: 10rem;
+          right: 20rem;
+        }
+
+        &:nth-child(3) {
+          color: #727274;
+          position: absolute;
+          right: 0;
+          width: 20rem;
+        }
+      }
+
+      &:hover {
+        background: linear-gradient(180deg, #d9eafb, #c4d9f1);
+        box-shadow: 0 0 0 1px #749aca;
+        border-radius: 3px;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        background-image: url("../../public/assets/shell32_264.ico");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}

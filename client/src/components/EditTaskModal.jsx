@@ -50,7 +50,7 @@ export function EditTaskModal({ task, onClose, onSave }) {
 
   const taskChange = async () => {
     if (!title || !selectedStatusId) {
-      setError("title is required.");
+      setError("Title is required");
       return;
     }
 
@@ -99,15 +99,19 @@ export function EditTaskModal({ task, onClose, onSave }) {
       <div className="modal-bg" onClick={onClose}></div>
       <div className="modal__card">
         <div className="modal__header">
-          <h2 className="modal__title">Edit Task</h2>
-          <button className="button button--close" onClick={onClose}>
-            <img src="/xmark-solid.svg" alt="Close" />
-          </button>
+          <h2 className="modal__title">
+            <img src="../assets/iexplore_32542.ico"/>
+            Edit Task
+            </h2>
+          <div className="header__button">
+            <button className="button button--close" onClick={onClose}>
+            </button>
+          </div>
         </div>
 
         <div className="modal__content">
           <div>
-            <label>Title *</label>
+            <label>Title:</label>
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -116,7 +120,7 @@ export function EditTaskModal({ task, onClose, onSave }) {
           </div>
 
           <div>
-            <label>Description</label>
+            <label>Description:</label>
             <textarea
               onChange={(e) => setDescription(e.target.value)}
               readOnly={!isEditing}
@@ -124,8 +128,8 @@ export function EditTaskModal({ task, onClose, onSave }) {
             ></textarea>
           </div>
 
-          <div>
-            <label>Status</label>
+          <div className="modal__select">
+            <label>Status:</label>
             <select
               value={selectedStatusId}
               onChange={(e) => setSelectedStatusId(e.target.value)}
@@ -140,7 +144,7 @@ export function EditTaskModal({ task, onClose, onSave }) {
           </div>
 
           <div>
-            <label>Labels</label>
+            <label>Labels:</label>
             <div className="modal__labels">
               {labels.map((label) => {
                 const isSelected = selectedLabelIds.includes(label.id);
@@ -163,26 +167,27 @@ export function EditTaskModal({ task, onClose, onSave }) {
             </div>
           </div>
 
-          {error && <p className="error">{error}</p>}
-          {loading && <p>Saving</p>}
 
           <div className="modal__buttons">
-            <button className="button" onClick={onClose}>
-              Cancel
-            </button>
+          {error && <p className="modal__message">{error}</p>}
+          {loading && <p className="modal__message">Saving...</p>}
+
             {!isEditing ? (
-              <button className="button" onClick={() => setIsEditing(true)}>
+              <button className="button button--modal" onClick={() => setIsEditing(true)}>
                 Edit
               </button>
             ) : (
               <button
-                className="button"
+                className="button button--modal"
                 onClick={taskChange}
                 disabled={loading}
               >
                 Save
               </button>
             )}
+            <button className="button button--modal" onClick={onClose}>
+              Cancel
+            </button>
           </div>
         </div>
       </div>

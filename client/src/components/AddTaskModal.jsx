@@ -98,14 +98,15 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
 
         <div className="modal__header">
           <h2 className="modal__title">Add new task</h2>
-          <button className="button button--close" onClick={onClose}>
-            <img src="/xmark-solid.svg" alt="Close" />
-          </button>
+          <div className="header__button">
+            <button className="button button--close" onClick={onClose}>
+            </button>
+          </div>
         </div>
 
         <div className="modal__content">
           <div>
-            <label>Title *</label>
+            <label>Title:</label>
             <input
               name="title"
               value={title}
@@ -115,7 +116,7 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
           </div>
 
           <div>
-            <label>Description</label>
+            <label>Description:</label>
             <textarea
               name="description"
               value={description}
@@ -124,8 +125,8 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
             ></textarea>
           </div>
 
-          <div>
-            <label>Status</label>
+          <div className="modal__select">
+            <label>Status:</label>
             <select
               value={selectedStatusId}
               onChange={(e) => setSelectedStatusId(e.target.value)}
@@ -140,7 +141,7 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
           </div>
 
           <div>
-            <label>Labels</label>
+            <label>Labels:</label>
             <div className="modal__labels">
               {labels.map((label) => {
                 const isSelected = selectedLabelIds.includes(label.id);
@@ -158,15 +159,16 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
             </div>
           </div>
 
-          {error && <p className="error">{error}</p>}
-          {loading && <p>Saving</p>}
 
           <div className="modal__buttons">
-            <button className="button" onClick={onClose}>
-              Cancel
-            </button>
-            <button className="button" onClick={taskAdd} disabled={loading}>
+          {error && <p className="modal__message">{error}</p>}
+          {loading && <p className="modal__message">Saving...</p>}
+
+            <button className="button button--modal" onClick={taskAdd} disabled={loading}>
               Save
+            </button>
+            <button className="button button--modal" onClick={onClose}>
+              Cancel
             </button>
           </div>
         </div>
