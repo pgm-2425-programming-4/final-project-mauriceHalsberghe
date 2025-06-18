@@ -7,7 +7,7 @@
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.7);
 
   background-color: rgba(0, 0, 0, 0.5);
@@ -30,7 +30,6 @@
       height: 1px;
       width: 65%;
       background-color: rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
   }
 
@@ -38,8 +37,10 @@
     display: flex;
     width: fit-content;
     flex-direction: column;
-    gap: 32px;
+    gap: 1rem;
     width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1rem;
   }
 
   .active {
@@ -90,7 +91,7 @@
     .aside__input {
       color: black;
       background-color: #e6eef9cb;
-      background-image: url('/public/assets/shell32_16785.ico');
+      background-image: url("/public/assets/shell32_16785.ico");
       background-repeat: no-repeat;
       background-size: 20px 20px;
       background-position: right center;
@@ -104,6 +105,42 @@
         color: #84898f;
         font-style: italic;
       }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .aside {
+    position: static;
+    padding: 1rem;
+    flex-direction: row;
+    height: 7rem;
+
+    .aside__link {
+      height: fit-content;
+      width: fit-content;
+    }
+
+    .aside__list {
+      flex-direction: row;
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      padding: 1rem 0 0 1rem;
+      width: calc(100% - 1rem);
+    }
+
+    .aside__new-project {
+      position: absolute;
+      bottom: -8rem;
+      left: 0;
+      padding: 10px;
+      box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.7);
+
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+      border: 1px solid white;
     }
   }
 }

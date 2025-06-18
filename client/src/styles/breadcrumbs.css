@@ -15,7 +15,8 @@
     content: url("../../public/assets/double-arrow-left.svg");
     position: absolute;
     left: 28px;
-    top: -8px;
+    top: 2px;
+    pointer-events: none;
   }
 
   .breadcrumbs__img {
@@ -42,7 +43,22 @@
       content: url("../../public/assets/arrow-right.svg");
       position: absolute;
       right: -28px;
+      top: -1px;
       width: 1em;
+      pointer-events: none;
     }
+  }
+}
+
+@media (max-width: 1200px) {
+  .breadcrumbs {
+    width: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .breadcrumbs {
+    padding-right: 24px;
+    overflow-x: hidden;
   }
 }

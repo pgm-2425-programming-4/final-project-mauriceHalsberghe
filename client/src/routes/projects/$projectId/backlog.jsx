@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { fetchTasks } from "../../../queries/fetch-tasks-by-projectid";
 import React, { useState } from "react";
 import { Pagination } from "../../../components/Pagination";
@@ -15,7 +15,16 @@ export const Route = createFileRoute("/projects/$projectId/backlog")({
   },
 
   component: BacklogPage,
-  notFoundComponent: () => <div>Project not found</div>,
+  notFoundComponent: () => (
+    <div className="error">
+      <h1 className="error__title">Error</h1>
+      <div className="error__content">
+        <img className="error__img" src="/assets/DxpTaskSync_62.ico"/>
+        <p className="error__message">Project not found</p>
+      </div>
+        <Link className="button button--error" to={'/'} >Home</Link>
+    </div>
+  ),
 });
 
 function BacklogPage() {
@@ -52,11 +61,11 @@ function BacklogPage() {
             <>
               <ul className="backlog__list">
                 {paginatedTasks.map((task) => {
-                  let labelString = ''
+                  let labelString = "";
                   task.task_labels.map((label) => {
-                    labelString += label.name
-                    labelString += ', ';
-                  })
+                    labelString += label.name;
+                    labelString += ", ";
+                  });
 
                   const date = new Date(task.updatedAt);
                   const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;

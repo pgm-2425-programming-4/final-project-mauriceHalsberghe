@@ -56,10 +56,10 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
             onPageSizeChanged(numericValue);
           }}
         >
-          <option value={5}>5 items per page</option>
-          <option value={10}>10 items per page</option>
-          <option value={15}>15 items per page</option>
-          <option value={20}>20 items per page</option>
+          <option value={5}>5 items</option>
+          <option value={10}>10 items</option>
+          <option value={15}>15 items</option>
+          <option value={20}>20 items</option>
         </select>
 
         <ul className="pagination__list">{generatePageButtons()}</ul>
@@ -69,7 +69,7 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
           className="button button--prev"
           disabled={currentPage === 1}
         >
-          Previous page
+          Previous
         </button>
 
         <button
@@ -77,7 +77,7 @@ export function Pagination({ currentPage, pageCount, onPageChanged, pageSize, on
           className="button button--next"
           disabled={currentPage === pageCount}
         >
-          Next page
+          Next
         </button>
       </nav>
     </>
