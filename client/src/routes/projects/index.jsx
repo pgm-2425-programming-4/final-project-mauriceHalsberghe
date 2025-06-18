@@ -56,7 +56,7 @@ function RouteComponent() {
               {data.map(project => (
                 <React.Fragment key={project.id}>
                   <Link className='note__link' to={project.documentId}>
-                    - {project.title}
+                    -&gt; {project.title}
                   </Link>
                   <br />
                 </React.Fragment>

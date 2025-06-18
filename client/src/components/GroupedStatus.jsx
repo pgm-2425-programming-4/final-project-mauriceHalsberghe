@@ -13,7 +13,7 @@ export default function GroupedStatus({ tasks: initialTasks, statuses }) {
 
   const updateTask = (updatedTask) => {
     setTasks((prevTasks) =>
-      prevTasks.map((t) => (t.id === updatedTask.id ? updatedTask : t))
+      prevTasks.map((prevT) => (prevT.id === updatedTask.id ? updatedTask : prevT))
     );
     setSelectedTask(null);
   };
