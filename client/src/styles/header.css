@@ -42,6 +42,10 @@
       }
     }
 
+    .header__select {
+      cursor: pointer;
+    }
+
     .header__input {
       width: 18rem;
       background-image: url("../../public/assets/iexplore_32538.ico");
