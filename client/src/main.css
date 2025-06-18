@@ -57,13 +57,10 @@ ul {
 }
 
 .main {
+  margin-left: 14rem;
   padding: 2rem;
   width: 100%;
-  border-left: 1px solid var(--bg-300);
-  .main__content {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
+
 }
 
 .main:has(.backlog) {

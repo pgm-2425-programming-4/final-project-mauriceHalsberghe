@@ -1,19 +1,30 @@
 .card {
-  background-color: var(--bg-200);
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  box-shadow: 0px 3px 10px #0000003d;
+  background-color: #fcfcfc;
+  margin: 10px;
+  box-shadow: 0px 0px 0px 1px #ffffff;
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   cursor: pointer;
 
+  &:hover {
+    box-shadow: 0px 0px 0px 1px #bcdaff;
+  }
+
   .card__title {
-    font-size: 1.2rem;
+    background-color: #dce7f9;
+    border-bottom: 1px solid #bbccde;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+    color: black;
     margin: 0;
   }
 
   .card__labels {
+    margin-top: 16px;
+    padding: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -21,10 +32,16 @@
   }
 
   .card__label {
-    font-size: 1rem;
-    background-color: var(--primary-200);
-    padding: 0.25rem;
-    color: var(--bg-100);
-    border-radius: var(--border-radius);
+    font-size: 16px;
+    color: black;
+    background:
+      linear-gradient(180deg, #eee 45%, #c3dcea 0),
+      linear-gradient(180deg, #eee 45%, #ddd 0, #bbb);
+    border: 1.5px solid #3083b7;
+    border-radius: 3px;
+    min-height: 23px;
+    width: fit-content !important;
+    padding: 0 1rem;
+    text-align: center;
   }
 }
