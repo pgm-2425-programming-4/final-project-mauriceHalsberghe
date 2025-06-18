@@ -29,6 +29,9 @@ server/.Spotlight-V100
 server/.Trashes
 server/._*
 
+constants
+constants.js
+
 server/*~
 
 server/Thumbs.db
