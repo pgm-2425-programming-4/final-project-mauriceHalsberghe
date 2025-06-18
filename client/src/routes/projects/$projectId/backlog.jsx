@@ -2,6 +2,7 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { fetchTasks } from "../../../queries/fetch-tasks-by-projectid";
 import React, { useState } from "react";
 import { Pagination } from "../../../components/Pagination";
+import { EditTaskModal } from "../../../components/EditTaskModal";
 
 export const Route = createFileRoute("/projects/$projectId/backlog")({
   loader: async ({ params }) => {
@@ -19,16 +20,20 @@ export const Route = createFileRoute("/projects/$projectId/backlog")({
     <div className="error">
       <h1 className="error__title">Error</h1>
       <div className="error__content">
-        <img className="error__img" src="/assets/DxpTaskSync_62.ico"/>
+        <img className="error__img" src="/assets/DxpTaskSync_62.ico" />
         <p className="error__message">Project not found</p>
       </div>
-        <Link className="button button--error" to={'/'} >Home</Link>
+      <Link className="button button--error" to={"/"}>
+        Home
+      </Link>
     </div>
   ),
 });
 
 function BacklogPage() {
-  const { tasks } = Route.useLoaderData();
+  const { tasks: initialTasks } = Route.useLoaderData();
+  const [tasks, setTasks] = useState(initialTasks);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const backlogTasks = tasks.filter(
     (task) => task.task_status.name === "Backlog"
@@ -43,6 +48,13 @@ function BacklogPage() {
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
+
+  const updateTask = (updatedTask) => {
+    setTasks((prev) =>
+      prev.map((t) => (t.id === updatedTask.id ? updatedTask : t))
+    );
+    setSelectedTask(null);
+  };
 
   return (
     <section className="main">
@@ -71,7 +83,7 @@ function BacklogPage() {
                   const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;
 
                   return (
-                    <li className="backlog__item" key={task.id}>
+                    <li className="backlog__item" key={task.id} onClick={() => setSelectedTask(task)}>
                       <p>{task.title}</p>
                       <p>{formattedDate}</p>
                       <p>{labelString}</p>
@@ -94,6 +106,14 @@ function BacklogPage() {
           setCurrentPage(1);
         }}
       />
+
+      {selectedTask && (
+        <EditTaskModal
+          task={selectedTask}
+          onClose={() => setSelectedTask(null)}
+          onSave={updateTask}
+        />
+      )}
     </section>
   );
 }
