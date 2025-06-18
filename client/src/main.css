@@ -33,12 +33,12 @@
 
 body {
   margin: 0;
-  height: 100vh; /* Ensures body fills the viewport height */
+  height: 100vh;
   background-image: url('../public/assets/background.png');
-  background-size: cover;             /* Make the image cover the entire screen */
-  background-repeat: no-repeat;       /* Prevent tiling */
-  background-attachment: fixed;       /* Prevent background from scrolling */
-  background-position: center center; /* Center it nicely */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center; 
 }
 a {
   color: black;

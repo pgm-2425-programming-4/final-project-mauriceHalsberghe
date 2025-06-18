@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchTasksStatuses } from "../queries/fetch-tasks-statuses";
-import { fetchLabels } from "../queries/fetch-labels"; // Ensure this exists
+import { fetchLabels } from "../queries/fetch-labels";
 import { addTask } from "../queries/add-task";
 
 export function AddTaskModal({ task, projectId, onClose, onSave }) {
