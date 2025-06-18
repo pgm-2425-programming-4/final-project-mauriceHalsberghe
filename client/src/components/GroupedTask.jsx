@@ -3,22 +3,36 @@ import GroupedStatus from "./GroupedStatus";
 import { Link } from "@tanstack/react-router";
 import { AddTaskModal } from "./AddTaskModal";
 
-export default function GroupedTasks({ tasks, statuses, labels }) {
+export default function GroupedTasks({ tasks, statuses, labels, project }) {
   const grouped = groupTasksByProject(tasks);
   
+  const hasGroups = Object.keys(grouped).length > 0;
+
+  console.log(project);
+  
+  if (hasGroups) {
+    return (
+      <>
+        {Object.entries(grouped).map(([projectId, { project, tasks }]) => (
+          <ProjectTasks
+            key={projectId}
+            project={project}
+            tasks={tasks}
+            statuses={statuses}
+            labels={labels}
+          />
+        ))}
+      </>
+    );
+  }
 
   return (
-    <>
-      {Object.entries(grouped).map(([projectId, { project, tasks }]) => (
-        <ProjectTasks
-          key={projectId}
-          project={project}
-          tasks={tasks}
-          statuses={statuses}
-          labels={labels}
-        />
-      ))}
-    </>
+    <ProjectTasks
+      project={project}
+      tasks={[]}
+      statuses={statuses}
+      labels={labels}
+    />
   );
 }
 
