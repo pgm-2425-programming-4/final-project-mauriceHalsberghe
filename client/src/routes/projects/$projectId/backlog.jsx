@@ -36,33 +36,55 @@ function BacklogPage() {
   );
 
   return (
-      <section className="main">
-        <div className="backlog">
-          <h2 className="backlog__title">Backlog for {project.title}</h2>
+    <section className="main">
+      <div className="backlog">
+        <h2 className="backlog__title">Backlog for {project.title}</h2>
 
+        <div className="backlog__content">
+          <div className="backlog__header">
+            <p>Name</p>
+            <p>Date modified</p>
+            <p>Labels</p>
+          </div>
           {paginatedTasks.length === 0 ? (
             <p>No backlog tasks found</p>
           ) : (
             <>
               <ul className="backlog__list">
-                {paginatedTasks.map((task) => (
-                  <li className="backlog__item" key={task.id}>
-                    {task.title}
-                  </li>
-                ))}
+                {paginatedTasks.map((task) => {
+                  let labelString = ''
+                  task.task_labels.map((label) => {
+                    labelString += label.name
+                    labelString += ', ';
+                  })
+
+                  const date = new Date(task.updatedAt);
+                  const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}`;
+
+                  return (
+                    <li className="backlog__item" key={task.id}>
+                      <p>{task.title}</p>
+                      <p>{formattedDate}</p>
+                      <p>{labelString}</p>
+                    </li>
+                  );
+                })}
               </ul>
             </>
           )}
         </div>
+      </div>
 
-      <Pagination 
-        currentPage={currentPage} 
-        pageSize={pageSize} 
-        onPageChanged={(page) => setCurrentPage(page)} 
+      <Pagination
+        currentPage={currentPage}
+        pageSize={pageSize}
+        onPageChanged={(page) => setCurrentPage(page)}
         pageCount={pageCount}
-        onPageSizeChanged={(size) => {setPageSize(size); setCurrentPage(1);}} 
-        />
-      </section>
+        onPageSizeChanged={(size) => {
+          setPageSize(size);
+          setCurrentPage(1);
+        }}
+      />
+    </section>
   );
-
 }
