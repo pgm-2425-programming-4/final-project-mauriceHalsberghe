@@ -7,6 +7,8 @@
 @import url('./styles/pagination.css');
 @import url('./styles/status.css');
 @import url('./styles/breadcrumbs.css');
+@import url('./styles/error.css');
+
 
 
 :root {

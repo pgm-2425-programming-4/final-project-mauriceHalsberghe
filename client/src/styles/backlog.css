@@ -93,6 +93,7 @@
       position: relative;
       display: flex;
       padding: 3px 2px 3px 24px;
+      cursor: pointer;
 
       p {
         margin: 0;
