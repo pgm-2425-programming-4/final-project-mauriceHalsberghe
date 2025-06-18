@@ -40,7 +40,7 @@ export function AddTaskModal({ task, projectId, onClose, onSave }) {
       setTitle(task.title);
       setDescription(task.description || "");
       setSelectedStatusId(task.task_status.id || "");
-      setSelectedLabelIds(task.task_labels?.map((l) => l.id) || []);
+      setSelectedLabelIds(task.task_labels?.map((lab) => lab.id) || []);
     }
   }, [task]);
 
