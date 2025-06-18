@@ -60,8 +60,8 @@ function About() {
               Feel free to check out more of my work or connect with me on these
               platforms:
             </p>
-            <a className="note__link" target="_blank" href="https://github.com/mauriceHalsberghe">- GitHub</a><br/>
-            <a className="note__link" target="_blank" href="https://www.linkedin.com/in/maurice-halsberghe">- LinkedIn</a>
+            <a className="note__link" target="_blank" href="https://github.com/mauriceHalsberghe">-&gt; GitHub</a><br/>
+            <a className="note__link" target="_blank" href="https://www.linkedin.com/in/maurice-halsberghe">-&gt; LinkedIn</a>
           </div>
         </div>
       </div>
