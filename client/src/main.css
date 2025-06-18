@@ -38,11 +38,8 @@ body {
 }
 
 a {
-  color: var(--text-100);
+  color: black;
   text-decoration: none;
-  &:hover {
-    color: var(--primary-100);
-  }
 }
 
 ul {

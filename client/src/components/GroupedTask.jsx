@@ -56,36 +56,36 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
   return (
     <>
       <header className="header">
-
-        <div className="breadcrumbs">
-            <img className="breadcrumbs__img" src="/assets/shell32_264.ico"/>
-            <h2 className="breadcrumbs__title">Kanban</h2>
-            <h2 className="breadcrumbs__title">Projects</h2>
-            <h2 className="breadcrumbs__title">{project.title}</h2>
+        <div className="header__row">
+          <div className="breadcrumbs">
+              <img className="breadcrumbs__img" src="/assets/shell32_264.ico"/>
+              <h2 className="breadcrumbs__title">Kanban</h2>
+              <h2 className="breadcrumbs__title">Projects</h2>
+              <h2 className="breadcrumbs__title">{project.title}</h2>
+          </div>
+          
+          <div className="header__content">
+            <select className="header__select" value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
+              <option value="">All Labels</option>
+              {labels.map((label) => (
+                <option key={label.id} value={label.id}>
+                  {label.name}
+                </option>
+              ))}
+            </select>
+            <input
+              className="header__input"
+              placeholder="Search task"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
         </div>
-        
-        <div className="header__content">
-          <select className="header__select" value={selectedLabel} onChange={(e) => setSelectedLabel(e.target.value)}>
-            <option value="">All Labels</option>
-            {labels.map((label) => (
-              <option key={label.id} value={label.id}>
-                {label.name}
-              </option>
-            ))}
-          </select>
-          <input
-            className="header__input"
-            placeholder="Filter name..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
 
-
-        <div className="header__content">
+        <div className="header__buttons">
           <Link
             to={`/projects/${project.documentId}/backlog`}
-            className="header__link"
+            className="button"
           >
             View backlog
           </Link>
@@ -93,6 +93,7 @@ function ProjectTasks({ project, tasks: initialTasks, statuses, labels }) {
             Add new Task
           </button>
         </div>
+
       </header>
 
       <GroupedStatus tasks={filteredTasks} statuses={statuses} />

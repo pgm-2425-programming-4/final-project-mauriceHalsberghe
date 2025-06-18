@@ -1,14 +1,15 @@
 .breadcrumbs {
-  background-color: #e6eef9;
+  background-color: #e6eef9cb;
   border: 1px solid rgba(0, 0, 0, 0.7);
   box-shadow: 0 0 1px 0.5px #fff;
   border-radius: 3px;
-  height: fit-content;
   display: flex;
   align-items: center;
   gap: 32px;
+  height: 24px;
   padding: 2px 120px 2px 3px;
   position: relative;
+  width: 100%;
 
   &::before {
     content: url("../../public/assets/double-arrow-left.svg");
