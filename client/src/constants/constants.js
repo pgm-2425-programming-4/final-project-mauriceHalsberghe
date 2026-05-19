@@ -1,4 +1,4 @@
-export const API_URL = import.meta.env.API_URL;
-export const API_TOKEN = import.meta.env.API_KEY;
+export const API_URL = import.meta.env.VITE_API_URL;
+export const API_TOKEN = import.meta.env.VITE_API_KEY;
 
 export const PAGE_SIZE_OPTIONS = [3, 5, 10, 25];
