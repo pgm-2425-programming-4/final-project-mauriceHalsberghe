@@ -21,6 +21,8 @@ client/*.njsproj
 client/*.sln
 client/*.sw?
 
+client/.env
+
 server/.DS_Store
 server/.AppleDouble
 server/.LSOverride
