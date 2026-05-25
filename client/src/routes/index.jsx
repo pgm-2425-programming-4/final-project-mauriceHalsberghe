@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import NotepadWindow from "../components/NotepadWindow";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -17,38 +18,16 @@ function Home() {
           </div>
         </div>
       </header>
-      <div className="main__content main__content--note">
-        <div className="modal__card modal__card--note">
-          <div className="modal__header">
-            <h2 className="modal__title">
-              <img src="../assets/notepad_2.ico" />
-              hellowWorld.txt - Notepad
-            </h2>
-            <div className="header__button">
-              <button className="button button--close"></button>
-            </div>
-          </div>
 
-          <div className="modal__content modal__content--note">
-            <div className="note__header">
-              <p><span>F</span>ile</p>
-              <p><span>E</span>dit</p>
-              <p>F<span>o</span>rmat</p>
-              <p><span>V</span>iew</p>
-              <p><span>H</span>elp</p>
-            </div>
-            <h1>Welcome to my Kanban app!</h1>
-            <p className="note__text">
-              A simple task manager designed with the classic look and feel of
-              Windows 7.
-            </p>
-            <p className="note__text">
-              This is my very first React project, built using
-            Strapi as the backend to manage and store tasks efficiently. 
-            </p>
-          </div>
-        </div>
+      <div className="main__content main__content--note">
+        <NotepadWindow
+          name={"hellowWorld"}
+          title={"Welcome to my Kanban app!"}
+          text_1={"A simple task manager designed with the classic look and feel of Windows 7."}
+          text_2={"This is my very first React project, built using Strapi as the backend to manage and store tasks efficiently."}
+        />
       </div>
+
     </section>
   );
 }
