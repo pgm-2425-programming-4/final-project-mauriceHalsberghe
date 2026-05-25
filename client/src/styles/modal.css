@@ -83,6 +83,8 @@
     }
 
     .modal__title {
+      cursor: default;
+      user-select: none;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -231,7 +233,9 @@
     padding: 0;
     padding-bottom: 1rem;
     height: fit-content;
+    cursor: text;
     .note__header {
+      cursor: default;
       height: fit-content;
       display: flex;
       flex-direction: row;
@@ -241,14 +245,22 @@
       padding: 2px 4px;
       p {
         margin: 0;
+        padding: 0 4px;
         font-weight: 400;
         font-size: 16px;
         color: black;
+        user-select: none;
         span {
           font-weight: 400;
           font-size: 16px;
           color: black;
           text-decoration: underline;
+        }
+
+        &:hover {
+          box-shadow: 0px 0px 0px 1px #bcdaff;
+          outline: 1px solid #888;
+          border-radius: 2px;
         }
       }
     }
